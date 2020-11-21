@@ -12,6 +12,7 @@ import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,11 +37,12 @@ public class InvoiceActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("invoice");
     DataObj dataObj=new DataObj();
-    Button saveAndPrintButton, printButton;
-    EditText name, qty;
+    Button saveAndPrintButton, printButton,select;
+    EditText name, qty,priceEt;
     Spinner spinner;
     String[] itemList;
     double [] itemPrice;
+
     ArrayAdapter <String> adapter;
     long invoiceNo = 0;
     DecimalFormat decimalFormat=new DecimalFormat("#.##");
@@ -52,6 +54,8 @@ public class InvoiceActivity extends AppCompatActivity {
 
         callFindViewById();
         callOnClickListener();
+
+
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -66,7 +70,25 @@ public class InvoiceActivity extends AppCompatActivity {
         });
     }
 
+
+
+
+
+
+
     private void callOnClickListener() {
+
+      //  priceEt.setText(String.valueOf (itemPrice[spinner.getSelectedItemPosition()]));
+
+
+
+        select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                priceEt.setText(String.valueOf (itemPrice[spinner.getSelectedItemPosition()]));
+            }
+        });
+
 
         saveAndPrintButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,9 +96,14 @@ public class InvoiceActivity extends AppCompatActivity {
                 dataObj.invoiceNo=invoiceNo +1;
                 dataObj.customerName= String.valueOf(name.getText());
                 dataObj.fuelQty= Double.parseDouble(String.valueOf(qty.getText()));
-                dataObj.amount=Double.valueOf(decimalFormat.format(dataObj.getFuelQty()*itemPrice[spinner.getSelectedItemPosition()]));
+
+                dataObj.price= Double.parseDouble(String.valueOf(priceEt.getText()));
+
+                //dataObj.amount=Double.valueOf(decimalFormat.format(dataObj.getFuelQty()*itemPrice[spinner.getSelectedItemPosition()]));
+                dataObj.amount=Double.valueOf(decimalFormat.format(dataObj.getFuelQty()*dataObj.getPrice()));
                 dataObj.fuelType= spinner.getSelectedItem().toString();
                 dataObj.date= new Date().getTime();
+
 
                 myRef.child(String.valueOf(invoiceNo+1)).setValue(dataObj);
                 Toast.makeText(InvoiceActivity.this,"Invoice is Saved & Uploaded",Toast.LENGTH_LONG).show();
@@ -168,13 +195,42 @@ public class InvoiceActivity extends AppCompatActivity {
     private void callFindViewById() {
         saveAndPrintButton=findViewById(R.id.btnSaveAndPrint);
         printButton=findViewById(R.id.btnPrint);
+        select=findViewById(R.id.select);
         name=findViewById(R.id.editTextName);
         qty=findViewById(R.id.editTextQty);
         spinner=findViewById(R.id.spinner);
-        itemList=new String []{"Petrol", "Diesel"};
-        itemPrice=new double []{72.67, 36.97};
-        adapter= new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, itemList);
+
+        priceEt=findViewById(R.id.price);
+
+        itemList=new String []{ "Select an item...","Petrol", "Diesel"};
+        itemPrice=new double []{0,72.67, 36.97};
+        adapter= new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, itemList){
+            @Override
+        public boolean isEnabled(int position){
+            if(position == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }};
+
+
+
         spinner.setAdapter(adapter);
 
+
+
+
     }
+
+
+
+
+
+
+
+
 }

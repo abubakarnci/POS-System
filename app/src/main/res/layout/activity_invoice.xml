@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".InvoiceActivity">
 
+
     <EditText
         android:id="@+id/editTextName"
         android:layout_width="wrap_content"
@@ -23,8 +24,8 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="211dp"
-        android:layout_height="52dp"
+        android:layout_width="299dp"
+        android:layout_height="76dp"
         android:layout_below="@+id/editTextName"
         android:layout_alignStart="@+id/editTextName"
         android:layout_marginStart="2dp"
@@ -32,16 +33,28 @@
         android:layout_marginEnd="-1dp" />
 
     <EditText
-        android:id="@+id/editTextQty"
-        android:layout_width="111dp"
-        android:layout_height="52dp"
+        android:id="@+id/price"
+        android:layout_width="79dp"
+        android:layout_height="wrap_content"
         android:layout_alignTop="@+id/spinner"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginStart="-138dp"
+        android:layout_marginTop="106dp"
         android:layout_toEndOf="@+id/spinner"
         android:ems="10"
-        android:inputType="numberDecimal"
-        android:hint="Quantity" />
+        android:hint="Price"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/editTextQty"
+        android:layout_width="79dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/spinner"
+        android:layout_marginStart="-228dp"
+        android:layout_marginTop="104dp"
+        android:layout_toEndOf="@+id/spinner"
+        android:ems="10"
+        android:hint="Quantity"
+        android:inputType="numberDecimal" />
 
     <Button
         android:id="@+id/btnSaveAndPrint"
@@ -49,8 +62,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/spinner"
         android:layout_alignStart="@+id/spinner"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="-3dp"
+        android:layout_marginTop="168dp"
         android:text="Save and Print" />
 
     <Button
@@ -61,8 +74,17 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/btnSaveAndPrint"
-        android:text="Print" />
+        android:text="Old invoices" />
 
+    <Button
+        android:id="@+id/select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btnSaveAndPrint"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/btnSaveAndPrint"
+        android:text="Select" />
 
 
 </RelativeLayout>

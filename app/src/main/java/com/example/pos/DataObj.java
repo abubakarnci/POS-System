@@ -6,6 +6,7 @@ public class DataObj {
     long date;
     String fuelType;
     Double fuelQty;
+    Double price;
     double amount;
 
     public DataObj() {
@@ -58,4 +59,13 @@ public class DataObj {
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
 }
