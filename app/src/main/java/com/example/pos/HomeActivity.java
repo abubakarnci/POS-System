@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -19,11 +21,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button btnLogout;
-    Button scanBtn;
+    ImageButton scanBtn;
     Button invoice;
+    ImageButton saleBtn;
+    ImageButton oldInvoice;
+    TextView date;
     private GoogleSignInClient mGoogleSignInClient;
 
 
@@ -32,19 +41,35 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        scanBtn=findViewById(R.id.scanBtn);
+        Date calendar= Calendar.getInstance().getTime();
+        String currentTime= DateFormat.getTimeInstance(DateFormat.SHORT).format(calendar);
+        String currentDate= DateFormat.getDateInstance(DateFormat.LONG).format(calendar);
+
+
+        date=findViewById(R.id.date);
+        date.setText(currentTime+": "+currentDate);
+        scanBtn=findViewById(R.id.scan);
         scanBtn.setOnClickListener(this);
-
         btnLogout=findViewById(R.id.logout);
-        invoice=findViewById(R.id.button2);
+        oldInvoice=findViewById(R.id.oldInvoice);
+        saleBtn=findViewById(R.id.sales);
 
-        invoice.setOnClickListener(new View.OnClickListener() {
+        saleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i= new Intent(HomeActivity.this,InvoiceActivity.class);
                 startActivity(i);
             }
         });
+
+        oldInvoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i= new Intent(HomeActivity.this,InvoiceActivity2.class);
+                startActivity(i);
+            }
+        });
+
         GoogleSignInOptions gso= new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()

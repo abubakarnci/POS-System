@@ -113,13 +113,7 @@ public class InvoiceActivity extends AppCompatActivity {
         });
 
 
-        printButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i= new Intent(InvoiceActivity.this,InvoiceActivity2.class);
-                startActivity(i);
-            }
-        });
+
     }
 
     private void printPDF() {
