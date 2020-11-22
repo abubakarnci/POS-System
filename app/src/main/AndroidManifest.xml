@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".InvoiceActivity2"></activity>
+        <activity android:name=".InvoiceActivity2" />
         <activity android:name=".InvoiceActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".LoginActivity" />
@@ -25,12 +25,16 @@
             android:screenOrientation="fullSensor"
             android:stateNotNeeded="true"
             android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <meta-data
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="ocr" />
     </application>
-    <uses-feature android:name="android.hardware.camera" />
-
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-feature android:name="android.hardware.camera" />
     <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
