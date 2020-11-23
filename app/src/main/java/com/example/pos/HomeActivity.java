@@ -27,9 +27,8 @@ import java.util.Date;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
 
-    Button btnLogout;
-    ImageButton scanBtn;
-    Button invoice;
+
+    ImageButton scanBtn, btnLogout;
     ImageButton saleBtn;
     ImageButton oldInvoice;
     TextView date;
