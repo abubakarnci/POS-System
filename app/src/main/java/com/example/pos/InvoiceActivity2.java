@@ -80,100 +80,108 @@ public class InvoiceActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 printPdf(oldPrintEditText.getText().toString());
-                Toast.makeText(InvoiceActivity2.this,"Invoice is Saved",Toast.LENGTH_LONG).show();
 
             }
         });
     }
 
-    private void printPdf(String toString) {
+    private void printPdf(final String toString) {
 
-        retriveRef= FirebaseDatabase.getInstance().getReference().child("invoice").child(toString);
-        retriveRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                invoiceNo= (long) snapshot.child("invoiceNo").getValue();
-                databaseDate= (long) snapshot.child("date").getValue();
-                customerName= (String) snapshot.child("customerName").getValue();
-                fuelType= (String) snapshot.child("fuelType").getValue();
-                fuelQty= Double.parseDouble(String.valueOf(snapshot.child("fuelQty").getValue()));
-                amount= Double.parseDouble(String.valueOf(snapshot.child("amount").getValue()));
+        if (toString.isEmpty()) {
+            oldPrintEditText.setError("Please Enter valid invoice number");
+            oldPrintEditText.requestFocus();
+        }
+
+        else {
+
+            retriveRef = FirebaseDatabase.getInstance().getReference().child("invoice").child(toString);
+            retriveRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    invoiceNo = (long) snapshot.child("invoiceNo").getValue();
+
+                        databaseDate = (long) snapshot.child("date").getValue();
+                        customerName = (String) snapshot.child("customerName").getValue();
+                        fuelType = (String) snapshot.child("fuelType").getValue();
+                        fuelQty = Double.parseDouble(String.valueOf(snapshot.child("fuelQty").getValue()));
+                        amount = Double.parseDouble(String.valueOf(snapshot.child("amount").getValue()));
 
 
-                PdfDocument myPdfDocument= new PdfDocument();
-                Paint paint =new Paint();
-                Paint forLine=new Paint();
-                forLine.setColor(Color.rgb(0,50,150));
+                        PdfDocument myPdfDocument = new PdfDocument();
+                        Paint paint = new Paint();
+                        Paint forLine = new Paint();
+                        forLine.setColor(Color.rgb(0, 50, 150));
 
-                PdfDocument.PageInfo myPageInfo=new PdfDocument.PageInfo.Builder(250,350, 1).create();
-                PdfDocument.Page myPage =myPdfDocument.startPage(myPageInfo);
+                        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(250, 350, 1).create();
+                        PdfDocument.Page myPage = myPdfDocument.startPage(myPageInfo);
 
-                Canvas canvas =myPage.getCanvas();
-                paint.setTextSize(15.5f);
-                paint.setColor(Color.rgb(0,50,250));
-                canvas.drawText("Gill's Shop", 20,20,paint);
-                paint.setTextSize(8.5f);
-                canvas.drawText("Unit 2, Trinity CourtYard",20,40,paint);
-                canvas.drawText(" Clondalkin, Dublin",20,55,paint);
+                        Canvas canvas = myPage.getCanvas();
+                        paint.setTextSize(15.5f);
+                        paint.setColor(Color.rgb(0, 50, 250));
+                        canvas.drawText("Gill's Shop", 20, 20, paint);
+                        paint.setTextSize(8.5f);
+                        canvas.drawText("Unit 2, Trinity CourtYard", 20, 40, paint);
+                        canvas.drawText(" Clondalkin, Dublin", 20, 55, paint);
 
-                forLine.setStyle(Paint.Style.STROKE);
-                forLine.setPathEffect(new DashPathEffect(new float[]{5,5},0));
-                forLine.setStrokeWidth(2);
-                canvas.drawLine(20,65,230,65, forLine);
+                        forLine.setStyle(Paint.Style.STROKE);
+                        forLine.setPathEffect(new DashPathEffect(new float[]{5, 5}, 0));
+                        forLine.setStrokeWidth(2);
+                        canvas.drawLine(20, 65, 230, 65, forLine);
 
-                canvas.drawText("Customer Name: "+ customerName,20,80, paint);
-                canvas.drawLine(20,90,230,90, forLine);
-                canvas.drawText("Purchase: " , 20, 105, paint);
-                canvas.drawText(fuelType,20,135,paint);
-                canvas.drawText(fuelQty+" ltr",120,135,paint);
+                        canvas.drawText("Customer Name: " + customerName, 20, 80, paint);
+                        canvas.drawLine(20, 90, 230, 90, forLine);
+                        canvas.drawText("Purchase: ", 20, 105, paint);
+                        canvas.drawText(fuelType, 20, 135, paint);
+                        canvas.drawText(fuelQty + " ltr", 120, 135, paint);
 
-                paint.setTextAlign(Paint.Align.RIGHT);
-                canvas.drawText(String.valueOf(decimalFormat.format(amount)),230,135, paint);
-                paint.setTextAlign(Paint.Align.LEFT);
+                        paint.setTextAlign(Paint.Align.RIGHT);
+                        canvas.drawText(String.valueOf(decimalFormat.format(amount)), 230, 135, paint);
+                        paint.setTextAlign(Paint.Align.LEFT);
 
-                canvas.drawText("+%",20,175, paint);
-                canvas.drawText("Tax 5%",120,175, paint);
-                paint.setTextAlign(Paint.Align.RIGHT);
-                canvas.drawText(decimalFormat.format(amount*5/100),230,175, paint);
-                paint.setTextAlign(Paint.Align.LEFT);
+                        canvas.drawText("+%", 20, 175, paint);
+                        canvas.drawText("Tax 5%", 120, 175, paint);
+                        paint.setTextAlign(Paint.Align.RIGHT);
+                        canvas.drawText(decimalFormat.format(amount * 5 / 100), 230, 175, paint);
+                        paint.setTextAlign(Paint.Align.LEFT);
 
-                canvas.drawLine(20,210,230,210, forLine);
-                paint.setTextSize(10f);
-                canvas.drawText("Total", 120,225, paint);
-                paint.setTextAlign(Paint.Align.RIGHT);
-                canvas.drawText(decimalFormat.format((amount*5/100)+amount),230,225, paint);
+                        canvas.drawLine(20, 210, 230, 210, forLine);
+                        paint.setTextSize(10f);
+                        canvas.drawText("Total", 120, 225, paint);
+                        paint.setTextAlign(Paint.Align.RIGHT);
+                        canvas.drawText(decimalFormat.format((amount * 5 / 100) + amount), 230, 225, paint);
 
-                paint.setTextAlign(Paint.Align.LEFT);
-                paint.setTextSize(8.5f);
-                canvas.drawText("Date: "+dateFormat.format(new Date(databaseDate).getTime()), 20,260, paint);
-                canvas.drawText("Invoice No: "+String.valueOf(invoiceNo), 20,275, paint);
-                canvas.drawText("Payment Method: Cash", 20,290, paint);
+                        paint.setTextAlign(Paint.Align.LEFT);
+                        paint.setTextSize(8.5f);
+                        canvas.drawText("Date: " + dateFormat.format(new Date(databaseDate).getTime()), 20, 260, paint);
+                        canvas.drawText("Invoice No: " + String.valueOf(invoiceNo), 20, 275, paint);
+                        canvas.drawText("Payment Method: Cash", 20, 290, paint);
 
-                paint.setTextAlign(Paint.Align.CENTER);
-                paint.setTextSize(12f);
-                canvas.drawText("Thank You!", canvas.getWidth()/2,320, paint);
+                        paint.setTextAlign(Paint.Align.CENTER);
+                        paint.setTextSize(12f);
+                        canvas.drawText("Thank You!", canvas.getWidth() / 2, 320, paint);
 
-                myPdfDocument.finishPage(myPage);
-                File file= new File(InvoiceActivity2.this.getExternalFilesDir("/"),invoiceNo+".pdf");
-                try {
-                    myPdfDocument.writeTo(new FileOutputStream(file));
+                        myPdfDocument.finishPage(myPage);
+                        File file = new File(InvoiceActivity2.this.getExternalFilesDir("/"), invoiceNo + ".pdf");
+                        try {
+                            myPdfDocument.writeTo(new FileOutputStream(file));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        Toast.makeText(InvoiceActivity2.this, "Invoice is Saved", Toast.LENGTH_LONG).show();
+                        myPdfDocument.close();
+
+
                 }
-                catch (IOException e) {
-                    e.printStackTrace();
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
                 }
+            });
 
-                myPdfDocument.close();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
+        }
     }
-
     private void loadTable() {
 
         myRef.addValueEventListener(new ValueEventListener() {

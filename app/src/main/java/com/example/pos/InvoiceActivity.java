@@ -173,7 +173,7 @@ public class InvoiceActivity extends AppCompatActivity {
         canvas.drawText("Thank You!", canvas.getWidth()/2,320, paint);
 
         myPdfDocument.finishPage(myPage);
-        File file= new File(this.getExternalFilesDir("/"),"Gill's POS.pdf");
+        File file= new File(this.getExternalFilesDir("/"),"Gill's POS "+invoiceNo+".pdf");
         try {
             myPdfDocument.writeTo(new FileOutputStream(file));
         }

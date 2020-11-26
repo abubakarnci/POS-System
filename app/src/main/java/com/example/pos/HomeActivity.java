@@ -29,8 +29,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
     ImageButton scanBtn, btnLogout;
-    ImageButton saleBtn;
+    ImageButton saleBtn,items;
     ImageButton oldInvoice;
+
     TextView date;
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -45,6 +46,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         String currentDate= DateFormat.getDateInstance(DateFormat.LONG).format(calendar);
 
 
+        items=findViewById(R.id.items);
         date=findViewById(R.id.date);
         date.setText(currentTime+": "+currentDate);
         scanBtn=findViewById(R.id.scan);
@@ -52,6 +54,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         btnLogout=findViewById(R.id.logout);
         oldInvoice=findViewById(R.id.oldInvoice);
         saleBtn=findViewById(R.id.sales);
+
+        items.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i= new Intent(HomeActivity.this,Inventory.class);
+                startActivity(i);
+            }
+        });
+
 
         saleBtn.setOnClickListener(new View.OnClickListener() {
             @Override

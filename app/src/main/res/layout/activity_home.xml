@@ -31,15 +31,41 @@
         app:srcCompat="@drawable/bill" />
 
     <ImageButton
-        android:id="@+id/scan"
+    android:id="@+id/scan"
+    android:layout_width="127dp"
+    android:layout_height="134dp"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentBottom="true"
+    android:layout_marginEnd="32dp"
+    android:layout_marginBottom="500dp"
+    android:backgroundTint="@color/white"
+    app:srcCompat="@drawable/barcode" />
+
+    <ImageButton
+        android:id="@+id/items"
         android:layout_width="127dp"
         android:layout_height="134dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="500dp"
+        android:layout_marginBottom="291dp"
         android:backgroundTint="@color/white"
-        app:srcCompat="@drawable/barcode" />
+        app:srcCompat="@drawable/inventory" />
+
+
+    <TextView
+        android:id="@+id/itemTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="259dp"
+        android:text="Inventory"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/salesTV"
@@ -68,7 +94,7 @@
         android:textAllCaps="false"
         android:textColor="@android:color/black"
         android:textSize="20sp"
-        android:textStyle="bold|italic" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/oldTv"
@@ -83,7 +109,7 @@
         android:textAllCaps="false"
         android:textColor="@android:color/black"
         android:textSize="20sp"
-        android:textStyle="bold|italic" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/date"
