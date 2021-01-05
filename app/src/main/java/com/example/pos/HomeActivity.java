@@ -31,7 +31,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     ImageButton scanBtn, btnLogout;
     ImageButton saleBtn,items;
     ImageButton oldInvoice;
-
+    Button btnMap;
     TextView date;
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -54,7 +54,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         btnLogout=findViewById(R.id.logout);
         oldInvoice=findViewById(R.id.oldInvoice);
         saleBtn=findViewById(R.id.sales);
-
+        btnMap=findViewById(R.id.map);
         items.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,6 +80,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i= new Intent(HomeActivity.this, MapActivity.class);
+                startActivity(i);
+            }
+        });
         GoogleSignInOptions gso= new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
