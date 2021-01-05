@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     EditText emailId, passwordId, cPassword, name;
-    Button btnSignUp;
+    Button btnSignUp,btnMap;
     TextView tvSignIn;
     FirebaseAuth mFirebaseAuth;
 
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         tvSignIn=findViewById(R.id.textView);
         cPassword=findViewById(R.id.cPassword);
         name=findViewById(R.id.name);
+        btnMap=findViewById(R.id.map);
 
         signInButton=findViewById(R.id.google);
         mAuth=FirebaseAuth.getInstance();
@@ -127,6 +128,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i= new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(i);
+            }
+        });
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i= new Intent(MainActivity.this, MapActivity.class);
                 startActivity(i);
             }
         });
