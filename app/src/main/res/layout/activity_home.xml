@@ -9,15 +9,49 @@
 
 
     <ImageButton
+        android:id="@+id/scan"
+        android:layout_width="127dp"
+        android:layout_height="134dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="510dp"
+        android:backgroundTint="@color/white"
+        app:srcCompat="@drawable/barcode" />
+
+    <ImageButton
+        android:id="@+id/logout"
+        android:layout_width="117dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="14dp"
+        android:backgroundTint="@color/white"
+        app:srcCompat="@drawable/logout" />
+
+    <ImageButton
         android:id="@+id/sales"
         android:layout_width="127dp"
         android:layout_height="134dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="500dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginBottom="510dp"
         android:backgroundTint="@color/white"
         app:srcCompat="@drawable/cashier" />
+
+
+    <ImageButton
+        android:id="@+id/items"
+        android:layout_width="127dp"
+        android:layout_height="134dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="306dp"
+        android:backgroundTint="@color/white"
+        app:srcCompat="@drawable/inventory" />
 
     <ImageButton
         android:id="@+id/oldInvoice"
@@ -26,32 +60,23 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="32dp"
-        android:layout_marginBottom="291dp"
+        android:layout_marginBottom="306dp"
         android:backgroundTint="@color/white"
         app:srcCompat="@drawable/bill" />
 
-    <ImageButton
-    android:id="@+id/scan"
-    android:layout_width="127dp"
-    android:layout_height="134dp"
-    android:layout_alignParentEnd="true"
-    android:layout_alignParentBottom="true"
-    android:layout_marginEnd="32dp"
-    android:layout_marginBottom="500dp"
-    android:backgroundTint="@color/white"
-    app:srcCompat="@drawable/barcode" />
-
-    <ImageButton
-        android:id="@+id/items"
-        android:layout_width="127dp"
-        android:layout_height="134dp"
+    <TextView
+        android:id="@+id/mapTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="291dp"
-        android:backgroundTint="@color/white"
-        app:srcCompat="@drawable/inventory" />
-
+        android:layout_marginEnd="179dp"
+        android:layout_marginBottom="116dp"
+        android:text="Maps"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/itemTv"
@@ -60,38 +85,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="259dp"
+        android:layout_marginBottom="274dp"
         android:text="Inventory"
         android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/salesTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="64dp"
-        android:layout_marginBottom="466dp"
-        android:text="Sales"
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/codeTV"
-        android:layout_width="142dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="442dp"
-        android:text="Bar &amp; QR Code Scanner"
-        android:textAlignment="center"
-        android:textAllCaps="false"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -103,10 +99,50 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="45dp"
-        android:layout_marginBottom="259dp"
+        android:layout_marginBottom="274dp"
         android:text="Old Invoices"
         android:textAlignment="center"
         android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/map"
+        android:layout_width="127dp"
+        android:layout_height="134dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="149dp"
+        android:backgroundTint="@color/white"
+        app:srcCompat="@drawable/map" />
+
+    <TextView
+        android:id="@+id/codeTV"
+        android:layout_width="142dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="452dp"
+        android:text="Bar &amp; QR Code Scanner"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/salesTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="65dp"
+        android:layout_marginBottom="477dp"
+        android:text="Sales"
+        android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -136,26 +172,15 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <ImageButton
-        android:id="@+id/logout"
-        android:layout_width="117dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="147dp"
-        android:layout_marginBottom="25dp"
-        android:backgroundTint="@color/white"
-        app:srcCompat="@drawable/logout" />
-
     <Button
-        android:id="@+id/map"
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="163dp"
-        android:layout_marginBottom="157dp"
-        android:text="Maps" />
+        android:layout_marginEnd="281dp"
+        android:layout_marginBottom="154dp"
+        android:text="sales" />
 
 
 </RelativeLayout>

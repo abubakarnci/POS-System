@@ -30,9 +30,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     ImageButton scanBtn, btnLogout;
     ImageButton saleBtn,items;
-    ImageButton oldInvoice;
-    Button btnMap;
+    ImageButton oldInvoice,btnMap;
     TextView date;
+    Button sales;
     private GoogleSignInClient mGoogleSignInClient;
 
 
@@ -55,6 +55,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         oldInvoice=findViewById(R.id.oldInvoice);
         saleBtn=findViewById(R.id.sales);
         btnMap=findViewById(R.id.map);
+        sales=findViewById(R.id.button2);
+        sales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i= new Intent(HomeActivity.this,SalesActivity.class);
+                startActivity(i);
+            }
+        });
         items.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

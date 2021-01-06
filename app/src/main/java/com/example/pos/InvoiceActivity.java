@@ -36,12 +36,16 @@ public class InvoiceActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("invoice");
+    DatabaseReference retriveRef;
     DataObj dataObj=new DataObj();
     Button saveAndPrintButton, printButton,select;
     EditText name, qty,priceEt;
     Spinner spinner;
     String[] itemList;
     double [] itemPrice;
+
+    String itemName;
+    Double sellPrice;
 
     ArrayAdapter <String> adapter;
     long invoiceNo = 0;
@@ -86,6 +90,11 @@ public class InvoiceActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 priceEt.setText(String.valueOf (itemPrice[spinner.getSelectedItemPosition()]));
+
+
+
+
+
             }
         });
 
@@ -193,11 +202,37 @@ public class InvoiceActivity extends AppCompatActivity {
         name=findViewById(R.id.editTextName);
         qty=findViewById(R.id.editTextQty);
         spinner=findViewById(R.id.spinner);
-
         priceEt=findViewById(R.id.price);
 
+
+
+        String num="1";
+        retriveRef = FirebaseDatabase.getInstance().getReference().child("items").child(num);
+
+        retriveRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                itemName = (String) snapshot.child("itemName").getValue();
+                //    sellPrice = Double.parseDouble(String.valueOf(snapshot.child("sellPrice").getValue()));
+                name=findViewById(R.id.editTextName);
+                name.setText(itemName);
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
         itemList=new String []{ "Select an item...","Petrol", "Diesel"};
-        itemPrice=new double []{0,72.67, 36.97};
+        itemPrice=new double []{0,72.67, 36.97,12.58};
         adapter= new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, itemList){
             @Override
         public boolean isEnabled(int position){
