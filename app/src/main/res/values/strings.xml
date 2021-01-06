@@ -4,6 +4,6 @@
     <string-array name="test">
         <item>Hello</item>
         <item>Hello2</item>
-        <item>Hello3</item>
+        <item></item>
     </string-array>
 </resources>
