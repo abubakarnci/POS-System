@@ -104,13 +104,13 @@ public class InvoiceActivity extends AppCompatActivity {
             public void onClick(View view) {
                 dataObj.invoiceNo=invoiceNo +1;
                 dataObj.customerName= String.valueOf(name.getText());
-                dataObj.fuelQty= Double.parseDouble(String.valueOf(qty.getText()));
+              //  dataObj.fuelQty= Double.parseDouble(String.valueOf(qty.getText()));
 
-                dataObj.price= Double.parseDouble(String.valueOf(priceEt.getText()));
+              //  dataObj.price= Double.parseDouble(String.valueOf(priceEt.getText()));
 
                 //dataObj.amount=Double.valueOf(decimalFormat.format(dataObj.getFuelQty()*itemPrice[spinner.getSelectedItemPosition()]));
-                dataObj.amount=Double.valueOf(decimalFormat.format(dataObj.getFuelQty()*dataObj.getPrice()));
-                dataObj.fuelType= spinner.getSelectedItem().toString();
+              //  dataObj.amount=Double.valueOf(decimalFormat.format(dataObj.getFuelQty()*dataObj.getPrice()));
+               // dataObj.fuelType= spinner.getSelectedItem().toString();
                 dataObj.date= new Date().getTime();
 
 
