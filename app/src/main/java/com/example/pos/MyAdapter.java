@@ -2,10 +2,12 @@ package com.example.pos;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+
+    private OnItemClickListener mListerer;
+    ArrayList<DataObj> dataObj=new ArrayList<>();;
+    ArrayList<String> iName=new ArrayList<>();
+    ArrayList<Double> iPrice=new ArrayList<>();
+    ArrayList<Double> iQty=new ArrayList<>();
+    ArrayList<Double> iBill=new ArrayList<>();
+    Double tBill=0.0;
+
+    public interface OnItemClickListener{
+        void onItemClicked(int position);
+        void OnDeleteClick(int position);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListerer=listener;
+    }
 
     Context context;
     ArrayList<InventObj> data1;
@@ -31,7 +49,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
        //LayoutInflater inflater=LayoutInflater.from(context);
        // View view = inflater.inflate(R.layout.my_row, parent,false);
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.my_row, parent, false);
-        return new MyViewHolder(view);
+        return new MyViewHolder(view, mListerer);
     }
 
     @Override
@@ -51,13 +69,64 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
         EditText item,price,qty;
+        ImageView imgDele;
         ConstraintLayout mainLayout;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             item=itemView.findViewById(R.id.item);
             price=itemView.findViewById(R.id.price);
             qty=itemView.findViewById(R.id.qty);
+            imgDele=itemView.findViewById(R.id.img_basket);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if(listener != null){
+
+                        int position= getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onItemClicked(position);
+                        }
+                    }
+
+                }
+            });
+
+
+            imgDele.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if(listener != null){
+
+                        int position= getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+
+
+                                    iName.add(item.getText().toString());
+                            iPrice.add( Double.valueOf(price.getText().toString()));
+                            iQty.add(Double.valueOf(qty.getText().toString()));
+                            iBill.add(Double.valueOf(price.getText().toString()) *
+                                    Double.valueOf(qty.getText().toString()));
+                            tBill=tBill + (Double.valueOf(price.getText().toString()) *
+                                    Double.valueOf(qty.getText().toString()));
+
+                            dataObj.add(new DataObj(iName,iPrice,iQty,iBill,tBill));
+
+
+                           Log.e("Test",dataObj.get(0).getItem().toString());
+                           System.out.println(dataObj.get(0).item);
+                            //salesActivity=new SalesActivity();
+                            listener.OnDeleteClick(position);
+                        }
+                    }
+
+                }
+            });
+
+
             mainLayout=itemView.findViewById(R.id.mainLayout);
 
         }

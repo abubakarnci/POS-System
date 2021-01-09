@@ -9,20 +9,54 @@ public class DataObj {
     ArrayList<String> item;
     ArrayList<Double> qty;
     ArrayList<Double> price;
+    ArrayList<Double> bill;
+    Double tBill;
+
+    public DataObj(ArrayList<String> item, ArrayList<Double> price, ArrayList<Double> qty, ArrayList<Double> bill, Double tBill) {
+        this.item=item;
+        this.qty=qty;
+        this.price=price;
+        this.bill=bill;
+        this.tBill=tBill;
+    }
+
+    public Double gettBill() {
+        return tBill;
+    }
+
+    public void settBill(Double tBill) {
+        this.tBill = tBill;
+    }
+
+    public ArrayList<Double> getBill() {
+        return bill;
+    }
+
+    public void setBill(ArrayList<Double> bill) {
+        this.bill = bill;
+    }
+
+    public ArrayList<Double> getPrice() {
+        return price;
+    }
+
+    public void setPrice(ArrayList<Double> price) {
+        this.price = price;
+    }
+
     ArrayList<Double> total;
     //String fuelType;
-    Double test;
 
-    public Double getTest() {
-        return test;
+
+
+    public ArrayList<String> getItem() {
+        return item;
     }
 
-    public void setTest(Double test) {
-        this.test = test;
+    public void setItem(ArrayList<String> item) {
+        this.item = item;
     }
 
-    //Double price;
-    double amount;
 
     public ArrayList<Double> getTotal() {
         return total;
@@ -59,13 +93,7 @@ public class DataObj {
         this.date = date;
     }
 
-    public ArrayList<String> getItem() {
-        return item;
-    }
 
-    public void setItem(ArrayList<String> item) {
-        this.item = item;
-    }
 
     public ArrayList<Double> getQty() {
         return qty;
@@ -75,21 +103,8 @@ public class DataObj {
         this.qty = qty;
     }
 
-    public ArrayList<Double> getPrice() {
-        return price;
-    }
 
-    public void setPrice(ArrayList<Double> price) {
-        this.price = price;
-    }
 
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
 
 
 

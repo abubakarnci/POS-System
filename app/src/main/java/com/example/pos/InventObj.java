@@ -18,8 +18,17 @@ public class InventObj {
     }
 
     double profit;
+    public InventObj(String name, double price) {
+        this.itemName=name;
+        this.sellPrice=price;
+    }
 
     public InventObj() {
+    }
+
+
+    public void changeText(String text){
+        itemName=text;
     }
 
     public long getItemNo() {

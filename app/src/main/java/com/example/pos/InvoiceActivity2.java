@@ -193,7 +193,7 @@ public class InvoiceActivity2 extends AppCompatActivity {
                             .value(String.valueOf(myDataSnapshot.child("customerName").getValue()))
                             .value(dateFormat.format(myDataSnapshot.child("date").getValue()))
                             .value(timeFormat.format(myDataSnapshot.child("date").getValue()))
-                            .value(String.valueOf(myDataSnapshot.child("amount").getValue()))
+                            .value(String.valueOf(myDataSnapshot.child("tBill").getValue()))
                             .build();
                     rows.add(row);
                 }
