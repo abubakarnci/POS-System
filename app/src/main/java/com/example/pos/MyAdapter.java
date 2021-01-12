@@ -116,8 +116,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                             dataObj.add(new DataObj(iName,iPrice,iQty,iBill,tBill));
 
 
-                           Log.e("Test",dataObj.get(0).getItem().toString());
-                           System.out.println(dataObj.get(0).item);
+                           //Log.e("Test",dataObj.get(0).getItem().toString());
+                            //System.out.println(dataObj.get(0).item);
                             //salesActivity=new SalesActivity();
                             listener.OnDeleteClick(position);
                         }

@@ -6,8 +6,17 @@ public class InventObj {
     String itemName;
     String itemType;
     Double costPrice;
+    Double tax;
     Double sellPrice;
     double quantity;
+
+    public Double getTax() {
+        return tax;
+    }
+
+    public void setTax(Double tax) {
+        this.tax = tax;
+    }
 
     public double getProfit() {
         return profit;

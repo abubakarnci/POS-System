@@ -28,8 +28,8 @@
         android:layout_height="45dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="129dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="104dp"
         android:hint="Profit %"
         android:inputType="numberDecimal"
         android:textSize="18sp" />
@@ -43,7 +43,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="88dp"
-        android:layout_marginBottom="411dp"
+        android:layout_marginBottom="450dp"
         android:ems="10"
         android:hint="Item Name"
         android:inputType="textPersonName"
@@ -59,12 +59,31 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="88dp"
-        android:layout_marginBottom="187dp"
+        android:layout_marginBottom="226dp"
         android:ems="10"
         android:hint="Quantity"
         android:inputType="number|numberDecimal"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="32dp" />
+
+
+
+    <EditText
+        android:id="@+id/tax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginBottom="170dp"
+        android:ems="10"
+        android:hint="VAT %"
+        android:inputType="number|numberDecimal"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="32dp" />
+
 
     <EditText
         android:id="@+id/sellPrice"
@@ -75,7 +94,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="88dp"
-        android:layout_marginBottom="243dp"
+        android:layout_marginBottom="282dp"
         android:ems="10"
         android:hint="Selling Price"
         android:inputType="number|numberDecimal"
@@ -91,7 +110,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="88dp"
-        android:layout_marginBottom="299dp"
+        android:layout_marginBottom="338dp"
         android:ems="10"
         android:hint="Cost Price"
         android:inputType="number|numberDecimal"
@@ -107,12 +126,16 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="88dp"
-        android:layout_marginBottom="355dp"
+        android:layout_marginBottom="394dp"
         android:ems="10"
         android:hint="Item Type"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="32dp" />
+
+
+
+
 
     <EditText
         android:id="@+id/id"
@@ -157,7 +180,7 @@
         android:layout_height="29dp"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="415dp"
+        android:layout_marginBottom="454dp"
         android:layout_toStartOf="@+id/itemName"
         android:text="Name:"
         android:textAllCaps="false"
@@ -171,7 +194,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="360dp"
+        android:layout_marginBottom="399dp"
         android:layout_toStartOf="@+id/itemName"
         android:text="Type:"
         android:textAllCaps="false"
@@ -185,7 +208,7 @@
         android:layout_height="39dp"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="-8dp"
-        android:layout_marginBottom="299dp"
+        android:layout_marginBottom="338dp"
         android:layout_toStartOf="@+id/itemName"
         android:text="Cost Price:"
         android:textAllCaps="false"
@@ -199,7 +222,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="-12dp"
-        android:layout_marginBottom="248dp"
+        android:layout_marginBottom="287dp"
         android:layout_toStartOf="@+id/itemName"
         android:text="Sell Price:"
         android:textAllCaps="false"
@@ -213,9 +236,23 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="-11dp"
-        android:layout_marginBottom="192dp"
+        android:layout_marginBottom="231dp"
         android:layout_toStartOf="@+id/itemName"
         android:text="Quantity:"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/taxTv"
+        android:layout_width="83dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="173dp"
+        android:layout_toStartOf="@+id/itemName"
+        android:text="VAT %:"
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="20sp"

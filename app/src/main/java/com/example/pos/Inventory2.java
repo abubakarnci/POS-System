@@ -35,8 +35,8 @@ public class Inventory2 extends AppCompatActivity {
     DatabaseReference retriveRef;
     InventObj inventObj=new InventObj();
     Button save,get;
-    EditText name,type,cPrice,sPrice,quantity,id ;
-    TextView profit,n,t,c,s,q;
+    EditText name,type,cPrice,sPrice,quantity,id,tax ;
+    TextView profit,n,t,c,s,q,v;
     DecimalFormat decimalFormat=new DecimalFormat("#.##");
 
     long itemNo=0;
@@ -46,6 +46,7 @@ public class Inventory2 extends AppCompatActivity {
     Double sellPrice;
     Double prof;
     Double quant;
+    Double vat;
 
 
     @Override
@@ -62,6 +63,7 @@ public class Inventory2 extends AppCompatActivity {
         sPrice=findViewById(R.id.sellPrice);
         quantity=findViewById(R.id.quantity);
         profit=findViewById(R.id.profit);
+        tax=findViewById(R.id.tax);
 
 
         n=findViewById(R.id.nameTv);
@@ -69,6 +71,7 @@ public class Inventory2 extends AppCompatActivity {
         c=findViewById(R.id.costTv);
         s=findViewById(R.id.sellTv);
         q=findViewById(R.id.quaTv);
+        v=findViewById(R.id.taxTv);
 
 
         profit.setVisibility(View.INVISIBLE);
@@ -78,12 +81,14 @@ public class Inventory2 extends AppCompatActivity {
         sPrice.setVisibility(View.INVISIBLE);
         quantity.setVisibility(View.INVISIBLE);
         save.setVisibility(View.INVISIBLE);
+        tax.setVisibility(View.INVISIBLE);
 
         n.setVisibility(View.INVISIBLE);
         t.setVisibility(View.INVISIBLE);
         c.setVisibility(View.INVISIBLE);
         s.setVisibility(View.INVISIBLE);
         q.setVisibility(View.INVISIBLE);
+        v.setVisibility(View.INVISIBLE);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -131,12 +136,14 @@ public class Inventory2 extends AppCompatActivity {
             sPrice.setVisibility(View.VISIBLE);
             quantity.setVisibility(View.VISIBLE);
             save.setVisibility(View.VISIBLE);
+            tax.setVisibility(View.VISIBLE);
 
             n.setVisibility(View.VISIBLE);
             t.setVisibility(View.VISIBLE);
             c.setVisibility(View.VISIBLE);
             s.setVisibility(View.VISIBLE);
             q.setVisibility(View.VISIBLE);
+            v.setVisibility(View.VISIBLE);
 
 
 
@@ -152,6 +159,7 @@ public class Inventory2 extends AppCompatActivity {
                     sellPrice = Double.parseDouble(String.valueOf(snapshot.child("sellPrice").getValue()));
                     quant = Double.parseDouble(String.valueOf(snapshot.child("quantity").getValue()));
                     prof = Double.parseDouble(String.valueOf(snapshot.child("profit").getValue()));
+                    vat = Double.parseDouble(String.valueOf(snapshot.child("tax").getValue()));
 
 
                     name.setText(itemName);
@@ -159,6 +167,7 @@ public class Inventory2 extends AppCompatActivity {
                     cPrice.setText(costPrice+"");
                     sPrice.setText(sellPrice+"");
                     quantity.setText(quant+"");
+                    tax.setText(vat+"");
                     profit.setText(prof+"%");
 
                 }

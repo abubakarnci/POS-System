@@ -24,7 +24,7 @@ public class Inventory extends AppCompatActivity {
     DatabaseReference myRef = database.getReference("items");
     InventObj inventObj=new InventObj();
     Button save, edit;
-    EditText name,type,cPrice,sPrice,quantity ;
+    EditText name,type,cPrice,sPrice,quantity,tax ;
     TextView profit;
     long itemNo = 0;
     DecimalFormat decimalFormat=new DecimalFormat("#.##");
@@ -41,6 +41,7 @@ public class Inventory extends AppCompatActivity {
         sPrice=findViewById(R.id.sellPrice);
         quantity=findViewById(R.id.quantity);
         profit=findViewById(R.id.profit);
+        tax=findViewById(R.id.tax);
 
         edit=findViewById(R.id.edit);
         edit.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +84,7 @@ public class Inventory extends AppCompatActivity {
                 inventObj.sellPrice= Double.parseDouble(String.valueOf(sPrice.getText()));
                 inventObj.costPrice= Double.parseDouble(String.valueOf(cPrice.getText()));
                 inventObj.quantity= Double.parseDouble(String.valueOf(quantity.getText()));
+                inventObj.tax= Double.parseDouble(String.valueOf(tax.getText()));
                 double cal1=((Double.parseDouble(String.valueOf(sPrice.getText()))) - (Double.parseDouble(String.valueOf(cPrice.getText()))));
                 double cal=(cal1 / (Double.parseDouble(String.valueOf(sPrice.getText()))))*100;
                 inventObj.profit=Double.valueOf(decimalFormat.format(cal));
