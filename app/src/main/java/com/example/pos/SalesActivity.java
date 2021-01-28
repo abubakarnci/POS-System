@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -45,6 +46,10 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.razorpay.Checkout;
+import com.razorpay.PaymentResultListener;
+
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -58,7 +63,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class SalesActivity extends AppCompatActivity {
+public class SalesActivity extends AppCompatActivity implements PaymentResultListener {
 
     private static final String TAG = "PdfCreatorActivity";
     final private int REQUEST_CODE_ASK_PERMISSIONS = 111;
@@ -97,8 +102,7 @@ public class SalesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales);
 
-
-
+        Checkout.preload(getApplicationContext());
 
 
         callFindViewById();
@@ -154,6 +158,11 @@ public class SalesActivity extends AppCompatActivity {
                 dataObj.date= new Date().getTime();
 
 
+                makepayment();
+                
+                
+                
+                
                 myRef.child(String.valueOf(invoiceNo+1)).setValue(dataObj);
                 Toast.makeText(SalesActivity.this,"Invoice is Saved & Uploaded",Toast.LENGTH_LONG).show();
 
@@ -184,6 +193,38 @@ public class SalesActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void makepayment() {
+
+        Checkout checkout = new Checkout();
+        checkout.setKeyID("rzp_test_rheSHzRKHKOYZI");
+
+        checkout.setImage(R.drawable.pos2);
+
+        /**
+         * Reference to current activity
+         */
+        final Activity activity = this;
+
+
+        try {
+            JSONObject options = new JSONObject();
+
+
+            options.put("name", "Gill's POS");
+            options.put("description", "Reference No. #123456");
+            options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
+           // options.put("order_id", "order_DBJOWzybf0sJbb");//from response of step 3.
+            options.put("theme.color", "#3399cc");
+            options.put("currency", "EUR");
+            options.put("amount", dataObj.tBill*100);//pass amount in currency subunits
+            options.put("prefill.email", "email@example.com");
+            options.put("prefill.contact","9988776655");
+            checkout.open(activity, options);
+        } catch(Exception e) {
+            Log.e("TAG", "Error in starting Razorpay Checkout", e);
+        }
     }
 
     private void createPdfWrapper() throws FileNotFoundException, DocumentException {
@@ -463,4 +504,17 @@ public class SalesActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onPaymentSuccess(String s) {
+
+        Toast.makeText(SalesActivity.this,"Successful payment ID: "+s,Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void onPaymentError(int i, String s) {
+
+        Toast.makeText(SalesActivity.this,"Failed and cause is: "+s,Toast.LENGTH_LONG).show();
+
+    }
 }

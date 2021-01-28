@@ -1,22 +1,31 @@
 package com.example.pos;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.transition.Slide;
 
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -32,14 +41,57 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     ImageButton saleBtn,items;
     ImageButton oldInvoice,btnMap;
     TextView date;
-    Button sales;
+
     private GoogleSignInClient mGoogleSignInClient;
+
+
+    NavigationView nav;
+    ActionBarDrawerToggle toggle;
+    DrawerLayout drawerLayout;
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+       Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
+        nav=(NavigationView)findViewById(R.id.navmenu);
+        drawerLayout=(DrawerLayout)findViewById(R.id.drawer);
+        toggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open, R.string.close);
+
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                switch (menuItem.getItemId()){
+
+                    case R.id.menu_home:
+                        Toast.makeText(getApplicationContext(),"Home Page",Toast.LENGTH_LONG).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+
+                    case R.id.menu_call:
+                        Toast.makeText(getApplicationContext(),"Call Panel is Open",Toast.LENGTH_LONG).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        Intent i= new Intent(HomeActivity.this,Dialer.class);
+                        startActivity(i);
+                        break;
+                }
+
+                return true;
+            }
+        });
+
 
         Date calendar= Calendar.getInstance().getTime();
         String currentTime= DateFormat.getTimeInstance(DateFormat.SHORT).format(calendar);
@@ -55,14 +107,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         oldInvoice=findViewById(R.id.oldInvoice);
         saleBtn=findViewById(R.id.sales);
         btnMap=findViewById(R.id.map);
-        sales=findViewById(R.id.button2);
-        sales.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i= new Intent(HomeActivity.this,SalesActivity.class);
-                startActivity(i);
-            }
-        });
+
+
         items.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,7 +121,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         saleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i= new Intent(HomeActivity.this,InvoiceActivity.class);
+                Intent i= new Intent(HomeActivity.this,SalesActivity.class);
                 startActivity(i);
             }
         });

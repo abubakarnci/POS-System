@@ -6,12 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".SalesActivity">
 
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Sales Activity"
+        app:titleTextColor="@color/white" />
+
     <EditText
         android:id="@+id/editTextName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="Customer Name"
         android:inputType="textPersonName"
@@ -32,28 +43,29 @@
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="276dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="260dp"
+        android:layout_marginBottom="20dp"
         android:text="Save and Print"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/insert"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="236dp"
+        android:layout_width="94dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="136dp"
         android:layout_marginBottom="24dp"
+        android:inputType="number"
+        android:hint="Position"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:inputType="number"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/bInset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="136dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="20dp"
         android:text="Insert"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

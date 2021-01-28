@@ -7,29 +7,40 @@
     android:layout_height="match_parent"
     tools:context=".InvoiceActivity2">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Old Invoices Activity"
+        app:titleTextColor="@color/white" />
+
+    <Button
+        android:id="@+id/oldPrintBtn"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="74dp"
+        android:layout_marginEnd="48dp"
+        android:layout_toStartOf="@+id/oldPrintEditText"
+        android:text="Print" />
 
     <EditText
         android:id="@+id/oldPrintEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/oldPrintBtn"
-        android:layout_marginStart="33dp"
-        android:layout_toEndOf="@+id/oldPrintBtn"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="74dp"
+        android:layout_marginEnd="41dp"
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="number"
         app:layout_constraintEnd_toStartOf="@+id/oldPrintBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/oldPrintBtn" />
-
-    <Button
-        android:id="@+id/oldPrintBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Print"
-        tools:layout_editor_absoluteX="261dp"
-        tools:layout_editor_absoluteY="20dp" />
 
     <ir.androidexception.datatable.DataTable
         android:id="@+id/data_table"
@@ -54,7 +65,11 @@
         app:row_text_color="#000"
         app:row_text_size="4sp"
         app:row_vertical_padding="16dp"
-        app:shadow="8dp" />
+        app:shadow="8dp" >
+
+    </ir.androidexception.datatable.DataTable>
+
+
 
 
 </RelativeLayout>
