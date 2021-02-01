@@ -81,10 +81,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         break;
 
                     case R.id.menu_call:
-                        Toast.makeText(getApplicationContext(),"Call Panel is Open",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Call Activity is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         Intent i= new Intent(HomeActivity.this,Dialer.class);
                         startActivity(i);
+                        break;
+
+                    case R.id.menu_profile:
+                        Toast.makeText(getApplicationContext(),"Profile Activity is Open",Toast.LENGTH_LONG).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        Intent j= new Intent(HomeActivity.this,Profile.class);
+                        startActivity(j);
                         break;
                 }
 
