@@ -21,7 +21,7 @@
         android:id="@+id/editTextName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
+        android:layout_marginEnd="25dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="Customer Name"
@@ -29,11 +29,27 @@
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="20dp"
+        android:ems="5"
+        android:text="Enter Name: "
+
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintStart_toStartOf="@+id/toolbar" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:layout_marginBottom="75dp"
+        android:layout_height="550dp"
+        android:layout_marginBottom="140dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -41,34 +57,41 @@
 
     <Button
         android:id="@+id/btnSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="260dp"
-        android:layout_marginBottom="20dp"
-        android:text="Save and Print"
+        android:layout_width="183dp"
+        android:layout_height="51dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginBottom="13dp"
+        android:background="@drawable/custom_button"
+        android:text="Save And Print"
+        android:textSize="20dp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/insert"
-        android:layout_width="94dp"
-        android:layout_height="41dp"
-        android:layout_marginEnd="136dp"
-        android:layout_marginBottom="24dp"
+        android:layout_width="147dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="224dp"
+        android:layout_marginBottom="80dp"
+        android:hint="Row At Position"
         android:inputType="number"
-        android:hint="Position"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/bInset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="72dp"
+        android:background="@drawable/button2"
         android:text="Insert"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAllCaps="false"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

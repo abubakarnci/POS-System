@@ -145,16 +145,7 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
                     dataObj.bill=mAdapter.dataObj.get(i).getBill();
                     dataObj.tBill=mAdapter.dataObj.get(i).tBill;
                 }
-                //dataObj.qty.add( Double.parseDouble(String.valueOf(qty.getText())));
 
-            /*  for(int i=0; i<10; i++) {
-                    dataObj.price.add(Double.parseDouble(String.valueOf(price.getText())));
-
-                }*/
-                //dataObj.test=(Double.parseDouble(String.valueOf(price.getText())));
-                //dataObj.amount=Double.valueOf(decimalFormat.format(dataObj.getFuelQty()*itemPrice[spinner.getSelectedItemPosition()]));
-                // dataObj.amount=Double.valueOf(decimalFormat.format(dataObj.getFuelQty()*dataObj.getPrice()));
-                // dataObj.fuelType= spinner.getSelectedItem().toString();
                 dataObj.date= new Date().getTime();
 
 
@@ -183,10 +174,18 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
             @Override
             public void onClick(View view) {
 
-               int position= Integer.parseInt(insert.getText().toString());
+                String row=insert.getText().toString();
 
-               input.add(position ,new InventObj("New Line Added at "+position,0.0));
-               mAdapter.notifyItemInserted(position);
+                if(row.isEmpty()){
+                    insert.setError("Please Enter valid number");
+                    insert.requestFocus();
+                }
+                else {
+                    int position = Integer.parseInt(row);
+
+                    input.add(position, new InventObj("New Line Added at " + position, 0.0));
+                    mAdapter.notifyItemInserted(position);
+                }
 
             }
         });
@@ -338,7 +337,7 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
 
 
 
-    private void printPDF() {
+   /* private void printPDF() {
 
        PdfDocument myPdfDocument= new PdfDocument();
         Paint paint =new Paint();
@@ -367,7 +366,7 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
         canvas.drawText("Quantity: " , 120, 110, paint);
         canvas.drawText("Extended Value: " , 210, 110, paint);
         double amount=0.0;
-        /*for(int i=0; i<mAdapter.dataObj.size(); i++) {
+        for(int i=0; i<mAdapter.dataObj.size(); i++) {
 
             canvas.drawText(String.valueOf(mAdapter.dataObj.get(i).getItem()), 20, 135, paint);
             canvas.drawText(mAdapter.dataObj.get(i).getQty().toString() , 120, 135, paint);
@@ -375,7 +374,7 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
             //dataObj.price=mAdapter.dataObj.get(i).getPrice();
             //dataObj.tBill=mAdapter.dataObj.get(i).tBill;
             amount= dataObj.tBill=mAdapter.dataObj.get(i).tBill;
-        }*/
+        }
 
         String[] itemm = String.valueOf(mAdapter.dataObj.get(0).getItem()).split("\\s");
         String[] qtyy = String.valueOf(mAdapter.dataObj.get(0).getQty()).split("\\s");
@@ -432,7 +431,7 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
         myPdfDocument.close();
 
 
-    }
+    }*/
 
 
 

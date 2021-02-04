@@ -78,21 +78,61 @@ public class Inventory extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                inventObj.itemNo=itemNo+1;
-                inventObj.itemName= String.valueOf(name.getText());
-                inventObj.itemType= String.valueOf(type.getText());
-                inventObj.sellPrice= Double.parseDouble(String.valueOf(sPrice.getText()));
-                inventObj.costPrice= Double.parseDouble(String.valueOf(cPrice.getText()));
-                inventObj.quantity= Double.parseDouble(String.valueOf(quantity.getText()));
-                inventObj.tax= Double.parseDouble(String.valueOf(tax.getText()));
-                double cal1=((Double.parseDouble(String.valueOf(sPrice.getText()))) - (Double.parseDouble(String.valueOf(cPrice.getText()))));
-                double cal=(cal1 / (Double.parseDouble(String.valueOf(sPrice.getText()))))*100;
-                inventObj.profit=Double.valueOf(decimalFormat.format(cal));
 
-                profit.setText(inventObj.profit+"%");
-                myRef.child(String.valueOf(itemNo+1)).setValue(inventObj);
-                Toast.makeText(Inventory.this,"Item Uploaded",Toast.LENGTH_LONG).show();
-            }
+                String na,ty,sP,cP,qa,tx;
+                na=String.valueOf(name.getText());
+                ty=String.valueOf(type.getText());
+                sP=(String.valueOf(sPrice.getText()));
+                cP=(String.valueOf(cPrice.getText()));
+                qa=(String.valueOf(quantity.getText()));
+                tx=(String.valueOf(tax.getText()));
+
+                if(na.isEmpty()){
+                    name.setError("Please Enter Name");
+                    name.requestFocus();
+                }
+                else if(ty.isEmpty()){
+                    type.setError("Please Enter Type");
+                    type.requestFocus();
+                }
+                else if(sP.isEmpty()){
+                    sPrice.setError("Please Enter Selling Price");
+                    sPrice.requestFocus();
+                }
+                else if(cP.isEmpty()){
+                    cPrice.setError("Please Enter Cost Price");
+                    cPrice.requestFocus();
+                }
+                else if(qa.isEmpty()){
+                    quantity.setError("Please Enter Quantity");
+                    quantity.requestFocus();
+                }
+                else if(tx.isEmpty()){
+                    tax.setError("Please Enter Tax");
+                    tax.requestFocus();
+                }
+               else {
+                    inventObj.itemNo=itemNo+1;
+                    inventObj.itemName= String.valueOf(name.getText());
+                    inventObj.itemType= String.valueOf(type.getText());
+                    inventObj.sellPrice= Double.parseDouble(String.valueOf(sPrice.getText()));
+                    inventObj.costPrice= Double.parseDouble(String.valueOf(cPrice.getText()));
+                    inventObj.quantity= Double.parseDouble(String.valueOf(quantity.getText()));
+                    inventObj.tax= Double.parseDouble(String.valueOf(tax.getText()));
+                    double cal1=((Double.parseDouble(String.valueOf(sPrice.getText()))) - (Double.parseDouble(String.valueOf(cPrice.getText()))));
+                    double cal=(cal1 / (Double.parseDouble(String.valueOf(sPrice.getText()))))*100;
+                    inventObj.profit=Double.valueOf(decimalFormat.format(cal));
+
+                    profit.setText(inventObj.profit+"%");
+                    myRef.child(String.valueOf(itemNo+1)).setValue(inventObj);
+                    Toast.makeText(Inventory.this,"Item Uploaded",Toast.LENGTH_LONG).show();
+
+                }
+
+
+
+
+                 }
         });
 
     }

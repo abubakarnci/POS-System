@@ -170,7 +170,10 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="160dp"
         android:layout_marginBottom="50dp"
-        android:text="Update" />
+        android:text="Update"
+        android:textColor="@color/white"
+        android:textSize="17dp"
+        android:background="@drawable/custom_button"/>
 
     <Button
         android:id="@+id/get"
@@ -180,7 +183,10 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="160dp"
         android:layout_marginBottom="526dp"
-        android:text="Get" />
+        android:text="Get"
+        android:textColor="@color/white"
+        android:textSize="17dp"
+        android:background="@drawable/custom_button"/>
 
 
     <TextView

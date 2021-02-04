@@ -2,13 +2,22 @@ package com.example.pos;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,10 +29,23 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,6 +56,12 @@ import ir.androidexception.datatable.model.DataTableHeader;
 import ir.androidexception.datatable.model.DataTableRow;
 
 public class InvoiceActivity2 extends AppCompatActivity {
+
+
+    private static final String TAG = "PdfCreatorActivity";
+    private File pdfFile;
+    Context context;
+
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("invoice");
@@ -49,9 +77,7 @@ public class InvoiceActivity2 extends AppCompatActivity {
     long invoiceNo;
     String customerName;
     long databaseDate;
-    String fuelType;
-    Double fuelQty;
-    double amount;
+    String item, qty,price,bill, tBill;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,74 +128,22 @@ public class InvoiceActivity2 extends AppCompatActivity {
 
                         databaseDate = (long) snapshot.child("date").getValue();
                         customerName = (String) snapshot.child("customerName").getValue();
-                        fuelType = (String) snapshot.child("fuelType").getValue();
-                        fuelQty = Double.parseDouble(String.valueOf(snapshot.child("fuelQty").getValue()));
-                        amount = Double.parseDouble(String.valueOf(snapshot.child("amount").getValue()));
 
+                        item =  snapshot.child("item").getValue().toString();
+                    //Log.e("Test",item+" gkgkgkjgjgkgjkgkjg");
+                     //System.out.println(item+"   jfjfjhfhjfjgdyfyidufiyduofuiduifyuudiydyidiydi");
+                        qty = (String.valueOf(snapshot.child("qty").getValue()));
+                        bill = (String.valueOf(snapshot.child("bill").getValue()));
+                       tBill = (String.valueOf(snapshot.child("tBill").getValue()));
+                        price = (String.valueOf(snapshot.child("price").getValue()));
 
-                        PdfDocument myPdfDocument = new PdfDocument();
-                        Paint paint = new Paint();
-                        Paint forLine = new Paint();
-                        forLine.setColor(Color.rgb(0, 50, 150));
-
-                        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(250, 350, 1).create();
-                        PdfDocument.Page myPage = myPdfDocument.startPage(myPageInfo);
-
-                        Canvas canvas = myPage.getCanvas();
-                        paint.setTextSize(15.5f);
-                        paint.setColor(Color.rgb(0, 50, 250));
-                        canvas.drawText("Gill's Shop", 20, 20, paint);
-                        paint.setTextSize(8.5f);
-                        canvas.drawText("Unit 2, Trinity CourtYard", 20, 40, paint);
-                        canvas.drawText(" Clondalkin, Dublin", 20, 55, paint);
-
-                        forLine.setStyle(Paint.Style.STROKE);
-                        forLine.setPathEffect(new DashPathEffect(new float[]{5, 5}, 0));
-                        forLine.setStrokeWidth(2);
-                        canvas.drawLine(20, 65, 230, 65, forLine);
-
-                        canvas.drawText("Customer Name: " + customerName, 20, 80, paint);
-                        canvas.drawLine(20, 90, 230, 90, forLine);
-                        canvas.drawText("Purchase: ", 20, 105, paint);
-                        canvas.drawText(fuelType, 20, 135, paint);
-                        canvas.drawText(fuelQty + " ltr", 120, 135, paint);
-
-                        paint.setTextAlign(Paint.Align.RIGHT);
-                        canvas.drawText(String.valueOf(decimalFormat.format(amount)), 230, 135, paint);
-                        paint.setTextAlign(Paint.Align.LEFT);
-
-                        canvas.drawText("+%", 20, 175, paint);
-                        canvas.drawText("Tax 5%", 120, 175, paint);
-                        paint.setTextAlign(Paint.Align.RIGHT);
-                        canvas.drawText(decimalFormat.format(amount * 5 / 100), 230, 175, paint);
-                        paint.setTextAlign(Paint.Align.LEFT);
-
-                        canvas.drawLine(20, 210, 230, 210, forLine);
-                        paint.setTextSize(10f);
-                        canvas.drawText("Total", 120, 225, paint);
-                        paint.setTextAlign(Paint.Align.RIGHT);
-                        canvas.drawText(decimalFormat.format((amount * 5 / 100) + amount), 230, 225, paint);
-
-                        paint.setTextAlign(Paint.Align.LEFT);
-                        paint.setTextSize(8.5f);
-                        canvas.drawText("Date: " + dateFormat.format(new Date(databaseDate).getTime()), 20, 260, paint);
-                        canvas.drawText("Invoice No: " + String.valueOf(invoiceNo), 20, 275, paint);
-                        canvas.drawText("Payment Method: Cash", 20, 290, paint);
-
-                        paint.setTextAlign(Paint.Align.CENTER);
-                        paint.setTextSize(12f);
-                        canvas.drawText("Thank You!", canvas.getWidth() / 2, 320, paint);
-
-                        myPdfDocument.finishPage(myPage);
-                        File file = new File(InvoiceActivity2.this.getExternalFilesDir("/"), invoiceNo + ".pdf");
-                        try {
-                            myPdfDocument.writeTo(new FileOutputStream(file));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-                        Toast.makeText(InvoiceActivity2.this, "Invoice is Saved", Toast.LENGTH_LONG).show();
-                        myPdfDocument.close();
+                    try {
+                        createPdfWrapper();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (DocumentException e) {
+                        e.printStackTrace();
+                    }
 
 
                 }
@@ -182,6 +156,8 @@ public class InvoiceActivity2 extends AppCompatActivity {
 
         }
     }
+
+
     private void loadTable() {
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -210,4 +186,92 @@ public class InvoiceActivity2 extends AppCompatActivity {
 
 
     }
+
+
+    private void createPdfWrapper() throws FileNotFoundException, DocumentException {
+            createPdf();
+
+    }
+
+
+    private void createPdf() throws FileNotFoundException, DocumentException {
+
+        File docsFolder = new File(Environment.getExternalStorageDirectory() + "/Invoices");
+        if (!docsFolder.exists()) {
+            docsFolder.mkdir();
+            Log.i(TAG, "Created a new directory for PDF");
+        }
+        String pdfname = (invoiceNo)+" Gill's POS.pdf";
+        pdfFile = new File(docsFolder.getAbsolutePath(), pdfname);
+        OutputStream output = new FileOutputStream(pdfFile);
+        Document document = new Document(PageSize.A4);
+        PdfPTable table = new PdfPTable(new float[]{5, 5, 5,5});
+        table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.getDefaultCell().setFixedHeight(50);
+        table.setTotalWidth(PageSize.A4.getWidth());
+        table.setWidthPercentage(100);
+        table.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
+        Font f = new Font(Font.FontFamily.TIMES_ROMAN, 45.0f, Font.BOLDITALIC, BaseColor.RED);
+        Font g = new Font(Font.FontFamily.HELVETICA, 25.0f, Font.NORMAL, BaseColor.BLACK);
+        Font c = new Font(Font.FontFamily.HELVETICA, 21.0f, Font.UNDERLINE, BaseColor.BLACK);
+        Font h = new Font(Font.FontFamily.HELVETICA, 19.0f, Font.BOLDITALIC, BaseColor.BLACK);
+        Font i = new Font(Font.FontFamily.HELVETICA, 17.0f, Font.NORMAL, BaseColor.BLACK);
+        Font b = new Font(Font.FontFamily.HELVETICA, 21.0f, Font.UNDERLINE, BaseColor.RED);
+        table.addCell((new Phrase("Items",h)));
+        table.addCell((new Phrase("Quantity",h)));
+        table.addCell((new Phrase("Price Per Unit",h)));
+        table.addCell((new Phrase("Extended Value",h)));
+        table.setHeaderRows(1);
+        PdfPCell[] cells = table.getRow(0).getCells();
+        for (int j = 0; j < cells.length; j++) {
+            cells[j].setBackgroundColor(BaseColor.LIGHT_GRAY);
+        }
+
+
+        double amount=0.0;
+        String[] itemm = String.valueOf(item).split(",");
+        String[] qtyy = String.valueOf(qty).split(",");
+        String[] pricee = String.valueOf(price).split(",");
+        String[] billl = String.valueOf(bill).split(",");
+
+
+        for (int x=0; x<itemm.length; x++) {
+            // Log.e("Sales: ",itemm[x]);
+            // System.out.println(itemm[x]);
+
+            table.addCell((new Phrase(itemm[x],i)));
+            table.addCell((new Phrase(qtyy[x],i)));
+          table.addCell((new Phrase(pricee[x],i)));
+         table.addCell((new Phrase(billl[x],i)));
+
+        }
+
+
+        PdfWriter.getInstance(document, output);
+        document.open();
+
+        document.add(new Paragraph("              Gill's Shop \n", f));
+        document.add(new Paragraph("                   Unit 2, Trinity CourtYard", g));
+        document.add(new Paragraph("                        Clondalkin, Dublin", g));
+        document.add(new Paragraph("            Email:- Gillventuresltd@gmail.com", g));
+        document.add(new Paragraph("                        Tel:- 014542844 \n\n", g));
+        document.add(new Paragraph("Invoice No: "+(invoiceNo), c));
+        document.add(new Paragraph("Customer: "+customerName+"\n\n", c));
+        document.add(table);
+        document.add(new Paragraph("\nTotal Bill: € "+tBill, b));
+        document.add(new Paragraph("\n              Thank You!",f));
+
+
+        document.close();
+
+        Toast.makeText(InvoiceActivity2.this,"Invoice is Saved & Printed ",Toast.LENGTH_LONG).show();
+        oldPrintEditText.setText(null);
+
+
+    }
+
+
+
+
+
 }
