@@ -78,6 +78,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.menu_home:
                         Toast.makeText(getApplicationContext(),"Home Page",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        Intent h= new Intent(HomeActivity.this,HomeActivity.class);
+                        startActivity(h);
                         break;
 
                     case R.id.menu_call:
@@ -92,6 +94,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         drawerLayout.closeDrawer(GravityCompat.START);
                         Intent j= new Intent(HomeActivity.this,Profile.class);
                         startActivity(j);
+                        break;
+
+                    case R.id.menu_alarm:
+                        Toast.makeText(getApplicationContext(),"Alarm Activity",Toast.LENGTH_LONG).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        Intent k= new Intent(HomeActivity.this,MainAlarm.class);
+                        startActivity(k);
                         break;
                 }
 

@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Profile"></activity>
+        <activity android:name=".MainAlarm"></activity>
+        <activity android:name=".Profile" />
         <activity android:name=".Dialer" />
         <activity android:name=".SalesActivity" />
         <activity android:name=".MapActivity" />
@@ -42,15 +43,15 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-    <uses-feature android:name="android.hardware.camera" />
-
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature android:name="android.hardware.camera" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

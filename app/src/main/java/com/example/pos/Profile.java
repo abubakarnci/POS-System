@@ -1,7 +1,11 @@
 package com.example.pos;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -10,15 +14,18 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.PermissionRequest;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -55,11 +62,74 @@ public class Profile extends AppCompatActivity {
     Bitmap bitmap;
     String UserID="";
 
+    NavigationView nav;
+    ActionBarDrawerToggle toggle;
+    DrawerLayout drawerLayout;
+
+    TimePicker timePicker;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
+        nav=(NavigationView)findViewById(R.id.navmenu);
+        drawerLayout=(DrawerLayout)findViewById(R.id.drawer);
+        toggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open, R.string.close);
+
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                switch (menuItem.getItemId()){
+
+                    case R.id.menu_home:
+                        Toast.makeText(getApplicationContext(),"Home Page",Toast.LENGTH_LONG).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        Intent h= new Intent(Profile.this,HomeActivity.class);
+                        startActivity(h);
+                        break;
+
+                    case R.id.menu_call:
+                        Toast.makeText(getApplicationContext(),"Call Activity",Toast.LENGTH_LONG).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        Intent i= new Intent(Profile.this,Dialer.class);
+                        startActivity(i);
+                        break;
+
+                    case R.id.menu_profile:
+                        Toast.makeText(getApplicationContext(),"Profile Activity",Toast.LENGTH_LONG).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        Intent j= new Intent(Profile.this,Profile.class);
+                        startActivity(j);
+                        break;
+
+                    case R.id.menu_alarm:
+                        Toast.makeText(getApplicationContext(),"Alarm Activity",Toast.LENGTH_LONG).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        Intent k= new Intent(Profile.this,MainAlarm.class);
+                        startActivity(k);
+                        break;
+                }
+
+                return true;
+            }
+        });
+
+
+
+
+
+
 
         uimage=(ImageView)findViewById(R.id.uimage);
         uname=(EditText) findViewById(R.id.uname);

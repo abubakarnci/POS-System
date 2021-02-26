@@ -14,4 +14,8 @@
         android:icon="@drawable/ic_baseline_call_24"
         android:title="Dial Number"/>
 
+    <item android:id="@+id/menu_alarm"
+        android:icon="@drawable/ic_baseline_alarms_24"
+        android:title="Set Alarm"/>
+
 </menu>
