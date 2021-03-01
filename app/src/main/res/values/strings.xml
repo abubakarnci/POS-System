@@ -2,7 +2,7 @@
     <string name="app_name">POS</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-
+    <string name="menu_refresh">Refresh</string>
     <string-array name="test">
         <item>Hello</item>
         <item>Hello2</item>

@@ -102,6 +102,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         Intent k= new Intent(HomeActivity.this,MainAlarm.class);
                         startActivity(k);
                         break;
+
+                    case R.id.menu_bot:
+                        Toast.makeText(getApplicationContext(),"Live Help",Toast.LENGTH_LONG).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        Intent p= new Intent(HomeActivity.this,ChatActivity.class);
+                        startActivity(p);
+                        break;
+
+
                 }
 
                 return true;

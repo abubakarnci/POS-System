@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Watson Assistant service credentials-->
+    <!-- ID of the Assistant to use -->
+    <string name="assistant_id">721aa1f8-6ea0-4f06-ac36-2c7d2b3dc0a1</string>
+
+    <!-- Watson Assistant service API Key-->
+    <string name="assistant_apikey">XLzXMi-Gt8vD_GzU3tkonLLS_3HNjeDhNJuDFH_4gyze</string>
+
+
+    <string name="assistant_url">https://api.eu-de.assistant.watson.cloud.ibm.com/instances/52f68d9a-4ed1-4736-a8ad-cd517bc8e7d9</string>
+
+
+    <!--Watson Speech To Text(STT) service credentials-->
+    <!--Watson Speech to Text service API Key-->
+    <string name="STT_apikey">0wIm6iOXB8O1-gL10XuBLAw6eQh0zd0s0tHjlijRR8dB</string>
+    
+
+    <!--STT URL provided in the service credentials -->
+    <string name="STT_url">https://api.eu-gb.speech-to-text.watson.cloud.ibm.com/instances/e8cec333-6321-46f0-91a6-4f23b14f45d1</string>
+
+
+    <!--Watson Text To Speech(TTS) service credentials-->
+    <!--Watson Text to Speech service API Key-->
+    <string name="TTS_apikey">ON_XDrXe-Sv3oLfFZlSbCBh9E8MI56Wy-4XG5saDZOqz</string>
+    
+    <!--TTS URL provided in the service credentials -->
+    <string name="TTS_url">https://api.eu-gb.text-to-speech.watson.cloud.ibm.com/instances/ab6a05fa-c77a-473b-9530-65ab2c7e0ff1</string>
+
+</resources>

@@ -119,6 +119,12 @@ public class Profile extends AppCompatActivity {
                         Intent k= new Intent(Profile.this,MainAlarm.class);
                         startActivity(k);
                         break;
+                    case R.id.menu_bot:
+                        Toast.makeText(getApplicationContext(),"ChatBot",Toast.LENGTH_LONG).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        Intent b= new Intent(Profile.this,ChatActivity.class);
+                        startActivity(b);
+                        break;
                 }
 
                 return true;

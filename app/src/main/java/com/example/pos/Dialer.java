@@ -83,6 +83,13 @@ public class Dialer extends AppCompatActivity {
                         Intent k= new Intent(Dialer.this,MainAlarm.class);
                         startActivity(k);
                         break;
+
+                    case R.id.menu_bot:
+                        Toast.makeText(getApplicationContext(),"ChatBot",Toast.LENGTH_LONG).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        Intent b= new Intent(Dialer.this,ChatActivity.class);
+                        startActivity(b);
+                        break;
                 }
 
                 return true;

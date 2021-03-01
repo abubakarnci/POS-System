@@ -6,4 +6,6 @@
     <color name="colorAlarm">#D81B60</color>
     <color name="white">#FFFFFF</color>
     <color name="black">@color/common_google_signin_btn_text_dark_focused</color>
+    <color name="bg_bubble_self">#62caa6</color>
+    <color name="bg_bubble_watbot">#ecf0f1</color>
 </resources>
