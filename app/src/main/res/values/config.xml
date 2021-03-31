@@ -3,13 +3,13 @@
 
     <!--Watson Assistant service credentials-->
     <!-- ID of the Assistant to use -->
-    <string name="assistant_id">721aa1f8-6ea0-4f06-ac36-2c7d2b3dc0a1</string>
+    <string name="assistant_id">395fa1be-ebe4-449e-ba5c-bf66b885b1ab</string>
 
     <!-- Watson Assistant service API Key-->
-    <string name="assistant_apikey">XLzXMi-Gt8vD_GzU3tkonLLS_3HNjeDhNJuDFH_4gyze</string>
+    <string name="assistant_apikey">uTb1tUapvG6Hm5rCTVA0ZacqxENIVlhAyqlygN71vXXP</string>
 
 
-    <string name="assistant_url">https://api.eu-de.assistant.watson.cloud.ibm.com/instances/52f68d9a-4ed1-4736-a8ad-cd517bc8e7d9</string>
+    <string name="assistant_url">https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/2e6db5df-775e-4606-b781-f5beb5c22fec</string>
 
 
     <!--Watson Speech To Text(STT) service credentials-->
