@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,6 +29,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -79,7 +81,7 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
     DatabaseReference retriveRef;
     EditText name;
     DataObj dataObj=new DataObj();
-    Button saveAndPrintButton;
+    Button payButton;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("invoice");
     ArrayAdapter<String> adapter;
@@ -95,6 +97,8 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
     Double iQty;
 
 
+    Dialog myDialog;
+
 
 
     @Override
@@ -102,8 +106,11 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales);
 
-        Checkout.preload(getApplicationContext());
+        myDialog = new Dialog(this);
 
+
+
+        Checkout.preload(getApplicationContext());
 
         callFindViewById();
         callOnClickListener();
@@ -127,13 +134,27 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
 
     }
 
+    public void ShowPopup(View v){
+
+        TextView txtclose;
+        Button btnCash;
+        Button btnCard;
+        myDialog.setContentView(R.layout.paymentpopup);
+        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+
+        btnCash=(Button) myDialog.findViewById(R.id.cash);
+        btnCard=(Button) myDialog.findViewById(R.id.card);
+
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+        myDialog.show();
 
 
-
-    private void callOnClickListener() {
-
-
-        saveAndPrintButton.setOnClickListener(new View.OnClickListener() {
+        btnCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dataObj.invoiceNo=invoiceNo +1;
@@ -150,12 +171,12 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
 
 
                 makepayment();
-                
-                
-                
-                
+
+
+
+
                 myRef.child(String.valueOf(invoiceNo+1)).setValue(dataObj);
-                Toast.makeText(SalesActivity.this,"Invoice is Saved & Uploaded",Toast.LENGTH_LONG).show();
+                //Toast.makeText(SalesActivity.this,"Invoice is Saved & Uploaded",Toast.LENGTH_LONG).show();
 
                 try {
                     createPdfWrapper();
@@ -166,9 +187,20 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
                 }
 
 
-               // printPDF();
+                // printPDF();
             }
         });
+
+
+
+
+    }
+
+
+
+
+    private void callOnClickListener() {
+
 
         bInset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -221,10 +253,14 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
             options.put("prefill.email", "email@example.com");
             options.put("prefill.contact","9988776655");
             checkout.open(activity, options);
+            Toast.makeText(SalesActivity.this,"Invoice is Saved & Uploaded",Toast.LENGTH_LONG).show();
+
         } catch(Exception e) {
             Log.e("TAG", "Error in starting Razorpay Checkout", e);
         }
     }
+
+
 
     private void createPdfWrapper() throws FileNotFoundException, DocumentException {
         int hasWriteStoragePermission = ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -453,7 +489,7 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
         context = this;
 
 
-        saveAndPrintButton=findViewById(R.id.btnSave);
+        payButton=findViewById(R.id.btnSave);
         //name = (EditText) findViewById(R.id.person_name);
         price= (EditText) findViewById(R.id.price);
         item=findViewById(R.id.item);
