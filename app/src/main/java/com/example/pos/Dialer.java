@@ -90,6 +90,13 @@ public class Dialer extends AppCompatActivity {
                         Intent b= new Intent(Dialer.this,ChatActivity.class);
                         startActivity(b);
                         break;
+
+                    case R.id.menu_calculator:
+                        Toast.makeText(getApplicationContext(),"Calculator",Toast.LENGTH_LONG).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        Intent c= new Intent(Dialer.this,CalculatorActivity.class);
+                        startActivity(c);
+                        break;
                 }
 
                 return true;

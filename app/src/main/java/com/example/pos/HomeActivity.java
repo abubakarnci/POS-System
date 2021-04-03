@@ -41,7 +41,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     ImageButton saleBtn,items;
     ImageButton oldInvoice,btnMap;
     TextView date;
-    Button calculator;
 
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -111,6 +110,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         startActivity(p);
                         break;
 
+                    case R.id.menu_calculator:
+                        Toast.makeText(getApplicationContext(),"Calculator",Toast.LENGTH_LONG).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        Intent c= new Intent(HomeActivity.this,CalculatorActivity.class);
+                        startActivity(c);
+                        break;
+
 
                 }
 
@@ -133,16 +139,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         oldInvoice=findViewById(R.id.oldInvoice);
         saleBtn=findViewById(R.id.sales);
         btnMap=findViewById(R.id.map);
-
-        calculator=findViewById(R.id.calculator);
-
-        calculator.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i= new Intent(HomeActivity.this,CalculatorActivity.class);
-                startActivity(i);
-            }
-        });
 
 
         items.setOnClickListener(new View.OnClickListener() {

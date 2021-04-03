@@ -85,6 +85,13 @@ public class MainAlarm extends AppCompatActivity {
                         Intent b= new Intent(MainAlarm.this,ChatActivity.class);
                         startActivity(b);
                         break;
+
+                    case R.id.menu_calculator:
+                        Toast.makeText(getApplicationContext(),"Calculator",Toast.LENGTH_LONG).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        Intent c= new Intent(MainAlarm.this,CalculatorActivity.class);
+                        startActivity(c);
+                        break;
                 }
 
                 return true;

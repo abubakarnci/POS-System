@@ -158,6 +158,12 @@ public class ChatActivity extends AppCompatActivity {
                         Intent b= new Intent(ChatActivity.this,ChatActivity.class);
                         startActivity(b);
                         break;
+                    case R.id.menu_calculator:
+                        Toast.makeText(getApplicationContext(),"Calculator",Toast.LENGTH_LONG).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        Intent c= new Intent(ChatActivity.this,CalculatorActivity.class);
+                        startActivity(c);
+                        break;
                 }
 
                 return true;

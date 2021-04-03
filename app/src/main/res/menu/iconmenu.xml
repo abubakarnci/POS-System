@@ -17,6 +17,10 @@
     <item android:id="@+id/menu_alarm"
         android:icon="@drawable/ic_baseline_alarms_24"
         android:title="Set Alarm"/>
+
+    <item android:id="@+id/menu_calculator"
+        android:icon="@drawable/ic_baseline_money_24"
+        android:title="Calculator"/>
     <item android:id="@+id/menu_bot"
         android:icon="@drawable/ic_baseline_live_help_24"
         android:title="Chatbot"/>
