@@ -88,10 +88,19 @@ public class CashActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(CashActivity.this,"Invoice is Saved & Uploaded", Toast.LENGTH_LONG).show();
 
-                Intent h= new Intent(CashActivity.this,HomeActivity.class);
-                startActivity(h);
+                String check=ed2.getText().toString();
+                if(check.isEmpty()){
+                    ed2.setError("Please Enter Amount");
+                    ed2.requestFocus();
+                }
+
+                else {
+                    Toast.makeText(CashActivity.this, "Invoice is Saved & Uploaded", Toast.LENGTH_LONG).show();
+
+                    Intent h = new Intent(CashActivity.this, HomeActivity.class);
+                    startActivity(h);
+                }
             }
         });
 

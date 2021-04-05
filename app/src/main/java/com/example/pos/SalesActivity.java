@@ -136,16 +136,22 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
 
     }
 
-    public void ShowPopup(View v){
+    public void ShowPopup(View v) {
 
-        TextView txtclose;
+        String check = name.getText().toString();
+        if (check.isEmpty()) {
+            name.setError("Please Enter Name");
+            name.requestFocus();
+        }
+        else{
+            TextView txtclose;
         Button btnCash;
         Button btnCard;
         myDialog.setContentView(R.layout.paymentpopup);
-        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+        txtclose = (TextView) myDialog.findViewById(R.id.txtclose);
 
-        btnCash=(Button) myDialog.findViewById(R.id.cash);
-        btnCard=(Button) myDialog.findViewById(R.id.card);
+        btnCash = (Button) myDialog.findViewById(R.id.cash);
+        btnCard = (Button) myDialog.findViewById(R.id.card);
 
         txtclose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,42 +161,40 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
         });
         myDialog.show();
 
+        dataObj.invoiceNo = invoiceNo + 1;
+        dataObj.customerName = String.valueOf(name.getText());
+
 
         btnCash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-
-                dataObj.invoiceNo=invoiceNo +1;
-                dataObj.customerName= String.valueOf(name.getText());
-                for(int i=0; i<mAdapter.dataObj.size(); i++) {
+                for (int i = 0; i < mAdapter.dataObj.size(); i++) {
                     dataObj.item = mAdapter.dataObj.get(i).getItem();
-                    iName=(mAdapter.dataObj.get(i).getItem().toString());
+                    iName = (mAdapter.dataObj.get(i).getItem().toString());
 
-                    Log.e("Test: ",iName);
+                    Log.e("Test: ", iName);
                     System.out.println(iName);
 
-                    dataObj.qty=mAdapter.dataObj.get(i).getQty();
-                    iQty=mAdapter.dataObj.get(i).getQty().toString();
+                    dataObj.qty = mAdapter.dataObj.get(i).getQty();
+                    iQty = mAdapter.dataObj.get(i).getQty().toString();
 
-                    dataObj.price=mAdapter.dataObj.get(i).getPrice();
-                    iPrice=mAdapter.dataObj.get(i).getPrice().toString();
+                    dataObj.price = mAdapter.dataObj.get(i).getPrice();
+                    iPrice = mAdapter.dataObj.get(i).getPrice().toString();
 
-                    dataObj.bill=mAdapter.dataObj.get(i).getBill();
-                    iTotal=mAdapter.dataObj.get(i).getBill().toString();
+                    dataObj.bill = mAdapter.dataObj.get(i).getBill();
+                    iTotal = mAdapter.dataObj.get(i).getBill().toString();
 
-                    dataObj.tBill=mAdapter.dataObj.get(i).tBill;
-                    subTotal=mAdapter.dataObj.get(i).tBill;
+                    dataObj.tBill = mAdapter.dataObj.get(i).tBill;
+                    subTotal = mAdapter.dataObj.get(i).tBill;
                 }
 
 
-
-                dataObj.date= new Date().getTime();
-
+                dataObj.date = new Date().getTime();
 
 
-                myRef.child(String.valueOf(invoiceNo+1)).setValue(dataObj);
+                myRef.child(String.valueOf(invoiceNo + 1)).setValue(dataObj);
                 //Toast.makeText(SalesActivity.this,"Invoice is Saved & Uploaded",Toast.LENGTH_LONG).show();
 
                 try {
@@ -202,43 +206,37 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
                 }
 
 
-                Intent p= new Intent(SalesActivity.this,CashActivity.class);
-                p.putExtra("name",iName);
-                p.putExtra("qty",iQty);
-                p.putExtra("price",iPrice);
-                p.putExtra("total",iTotal);
-                p.putExtra("subTotal",subTotal.toString());
+                Intent p = new Intent(SalesActivity.this, CashActivity.class);
+                p.putExtra("name", iName);
+                p.putExtra("qty", iQty);
+                p.putExtra("price", iPrice);
+                p.putExtra("total", iTotal);
+                p.putExtra("subTotal", subTotal.toString());
                 startActivity(p);
                 // printPDF();
             }
         });
 
 
-
-
-
         btnCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dataObj.invoiceNo=invoiceNo +1;
-                dataObj.customerName= String.valueOf(name.getText());
-                for(int i=0; i<mAdapter.dataObj.size(); i++) {
+
+                for (int i = 0; i < mAdapter.dataObj.size(); i++) {
                     dataObj.item = mAdapter.dataObj.get(i).getItem();
-                    dataObj.qty=mAdapter.dataObj.get(i).getQty();
-                    dataObj.price=mAdapter.dataObj.get(i).getPrice();
-                    dataObj.bill=mAdapter.dataObj.get(i).getBill();
-                    dataObj.tBill=mAdapter.dataObj.get(i).tBill;
+                    dataObj.qty = mAdapter.dataObj.get(i).getQty();
+                    dataObj.price = mAdapter.dataObj.get(i).getPrice();
+                    dataObj.bill = mAdapter.dataObj.get(i).getBill();
+                    dataObj.tBill = mAdapter.dataObj.get(i).tBill;
                 }
 
-                dataObj.date= new Date().getTime();
+                dataObj.date = new Date().getTime();
 
 
                 makepayment();
 
 
-
-
-                myRef.child(String.valueOf(invoiceNo+1)).setValue(dataObj);
+                myRef.child(String.valueOf(invoiceNo + 1)).setValue(dataObj);
                 //Toast.makeText(SalesActivity.this,"Invoice is Saved & Uploaded",Toast.LENGTH_LONG).show();
 
                 try {
@@ -255,8 +253,7 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
         });
 
 
-
-
+    }
     }
 
 
