@@ -92,13 +92,15 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
     EditText insert;
     Button bInset;
 
-    String iName;
-    Double iPrice;
-    Double iQty;
+    String iName="";
+
+    Double subTotal;
+    String iQty;
+    String iPrice;
+    String iTotal;
 
 
     Dialog myDialog;
-
 
 
     @Override
@@ -152,6 +154,67 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
             }
         });
         myDialog.show();
+
+
+        btnCash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+                dataObj.invoiceNo=invoiceNo +1;
+                dataObj.customerName= String.valueOf(name.getText());
+                for(int i=0; i<mAdapter.dataObj.size(); i++) {
+                    dataObj.item = mAdapter.dataObj.get(i).getItem();
+                    iName=(mAdapter.dataObj.get(i).getItem().toString());
+
+                    Log.e("Test: ",iName);
+                    System.out.println(iName);
+
+                    dataObj.qty=mAdapter.dataObj.get(i).getQty();
+                    iQty=mAdapter.dataObj.get(i).getQty().toString();
+
+                    dataObj.price=mAdapter.dataObj.get(i).getPrice();
+                    iPrice=mAdapter.dataObj.get(i).getPrice().toString();
+
+                    dataObj.bill=mAdapter.dataObj.get(i).getBill();
+                    iTotal=mAdapter.dataObj.get(i).getBill().toString();
+
+                    dataObj.tBill=mAdapter.dataObj.get(i).tBill;
+                    subTotal=mAdapter.dataObj.get(i).tBill;
+                }
+
+
+
+                dataObj.date= new Date().getTime();
+
+
+
+                myRef.child(String.valueOf(invoiceNo+1)).setValue(dataObj);
+                //Toast.makeText(SalesActivity.this,"Invoice is Saved & Uploaded",Toast.LENGTH_LONG).show();
+
+                try {
+                    createPdfWrapper();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (DocumentException e) {
+                    e.printStackTrace();
+                }
+
+
+                Intent p= new Intent(SalesActivity.this,CashActivity.class);
+                p.putExtra("name",iName);
+                p.putExtra("qty",iQty);
+                p.putExtra("price",iPrice);
+                p.putExtra("total",iTotal);
+                p.putExtra("subTotal",subTotal.toString());
+                startActivity(p);
+                // printPDF();
+            }
+        });
+
+
+
 
 
         btnCard.setOnClickListener(new View.OnClickListener() {
@@ -477,6 +540,8 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
     private void callFindViewById() {
 
         //View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.my_row, null, false);
+
+
 
         bInset=findViewById(R.id.bInset);
         insert=findViewById(R.id.insert);

@@ -10,8 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CalculatorActivity"></activity>
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".CashActivity"></activity>
+        <activity android:name=".CalculatorActivity" />
+        <activity android:name=".ChatActivity" />
         <activity android:name=".MainAlarm" />
         <activity android:name=".Profile" />
         <activity android:name=".Dialer" />
@@ -51,7 +52,7 @@
             android:authorities="${applicationId}.here.this.library.provider"
             android:exported="false"
             android:grantUriPermissions="true"
-            tools:replace="android:authorities"></provider>
+            tools:replace="android:authorities" />
     </application>
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
