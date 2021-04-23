@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this,"Signed In Successfully",Toast.LENGTH_SHORT).show();
             FirebaseGoogleAuth(acc);
 
-            Intent intSignUp= new Intent(MainActivity.this, HomeActivity.class);
+            Intent intSignUp= new Intent(MainActivity.this, IntroActivity.class);
             startActivity(intSignUp);
         }
         catch (ApiException e){

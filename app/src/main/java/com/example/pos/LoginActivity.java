@@ -1,8 +1,10 @@
 package com.example.pos;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
@@ -23,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     TextInputEditText emailId, passwordId;
-    Button btnSignIn;
+    Button btnSignIn, forgot;
     TextView tvSignUp;
     FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -40,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordId=findViewById(R.id.password);
         btnSignIn=findViewById(R.id.button);
         tvSignUp=findViewById(R.id.textView);
+        forgot=findViewById(R.id.forgot);
 
         mAuthStateListener= new FirebaseAuth.AuthStateListener() {
 
@@ -100,6 +105,63 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intSignUp);
             }
         });
+
+        forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final EditText resetMail =new EditText(v.getContext());
+
+                AlertDialog.Builder resetDialog= new AlertDialog.Builder(v.getContext());
+
+                resetDialog.setTitle("Reset Password?");
+                resetDialog.setMessage("Enter Your Email To Receive Reset Link.");
+
+                resetDialog.setView(resetMail);
+
+                resetDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // extracting email and sending link to that email
+
+                        String mail = resetMail.getText().toString();
+
+                        if (mail.isEmpty()) {
+                            Toast.makeText(LoginActivity.this,"Please Enter Email Before Clicking Submit", Toast.LENGTH_LONG).show();
+
+                        } else{
+                            mFirebaseAuth.sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+
+                                    Toast.makeText(LoginActivity.this, "Reset Link Sent To Your Email", Toast.LENGTH_LONG).show();
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(LoginActivity.this, "Error!!! " + e.getMessage(), Toast.LENGTH_LONG).show();
+
+                                }
+                            });
+                    }
+                    }
+                });
+
+                resetDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Closing view
+
+                    }
+                });
+
+                resetDialog.create().show();
+
+
+            }
+        });
+
 
 
     }
