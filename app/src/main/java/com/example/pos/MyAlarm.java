@@ -8,7 +8,7 @@ import android.provider.Settings;
 
 public class MyAlarm extends BroadcastReceiver {
 
-    //the method will be fired when the alarm is triggerred
+    //the method will be fired when the alarm is triggered
     @Override
     public void onReceive(Context context, Intent intent) {
 

@@ -8,10 +8,11 @@
     >
 
     <TextView
-        android:id="@+id/intro"
+        android:id="@+id/intro4"
         android:layout_width="251dp"
         android:layout_height="73dp"
         android:layout_marginTop="32dp"
+        android:transitionName="logo_text"
         android:fontFamily="cursive"
         android:text="Gill's POS"
         android:textColor="@color/black"
@@ -26,6 +27,7 @@
         android:id="@+id/imageView"
         android:layout_width="342dp"
         android:layout_height="325dp"
+        android:transitionName="logo_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
