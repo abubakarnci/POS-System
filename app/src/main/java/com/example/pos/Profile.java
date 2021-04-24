@@ -217,13 +217,22 @@ public class Profile extends AppCompatActivity {
         }
     }
 
-    public void updatetofirebase()
-    {
-        final ProgressDialog pd=new ProgressDialog(this);
-        pd.setTitle("File Uploader");
-        pd.show();
+    public void updatetofirebase() {
 
-        final StorageReference uploader=storageReference.child("profileimages/"+"img"+System.currentTimeMillis());
+
+        final StorageReference uploader = storageReference.child("profileimages/" + "img" + System.currentTimeMillis());
+
+        if (filepath==null) {
+            Toast.makeText(Profile.this, "Please select picture", Toast.LENGTH_LONG).show();
+
+        }
+
+        else if (filepath!=null){
+
+            final ProgressDialog pd = new ProgressDialog(this);
+            pd.setTitle("File Uploader");
+            pd.show();
+
         uploader.putFile(filepath)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -231,27 +240,28 @@ public class Profile extends AppCompatActivity {
                         uploader.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                final Map<String,Object> map=new HashMap<>();
-                                map.put("uimage",uri.toString());
-                                map.put("uname",uname.getText().toString());
-                                map.put("address",address.getText().toString());
-                                map.put("phoneNo",phoneNo.getText().toString());
+                                final Map<String, Object> map = new HashMap<>();
+                                map.put("uimage", uri.toString());
+                                map.put("uname", uname.getText().toString());
+                                map.put("address", address.getText().toString());
+                                map.put("phoneNo", phoneNo.getText().toString());
 
                                 dbreference.child(UserID).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if(snapshot.exists())
+                                        if (snapshot.exists())
                                             dbreference.child(UserID).updateChildren(map);
                                         else
                                             dbreference.child(UserID).setValue(map);
                                     }
+
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError error) {
                                     }
                                 });
 
                                 pd.dismiss();
-                                Toast.makeText(getApplicationContext(),"Updated Successfully",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Updated Successfully", Toast.LENGTH_LONG).show();
                             }
                         });
                     }
@@ -259,11 +269,12 @@ public class Profile extends AppCompatActivity {
                 .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                        float percent=(100*snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
-                        pd.setMessage("Uploaded :"+(int)percent+"%");
+                        float percent = (100 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
+                        pd.setMessage("Uploaded :" + (int) percent + "%");
                     }
                 });
 
+    }
     }
 
     @Override
