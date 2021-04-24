@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -52,7 +53,7 @@ import java.util.Map;
 public class Profile extends AppCompatActivity {
 
     ImageView uimage;
-    EditText uname;
+    TextInputEditText uname,phoneNo,address;
     Button btnupdate;
 
     DatabaseReference dbreference;
@@ -145,7 +146,10 @@ public class Profile extends AppCompatActivity {
 
 
         uimage=(ImageView)findViewById(R.id.uimage);
-        uname=(EditText) findViewById(R.id.uname);
+        uname= findViewById(R.id.uname);
+        address= findViewById(R.id.address);
+        phoneNo= findViewById(R.id.phoneNo);
+
         btnupdate=(Button)findViewById(R.id.btnupdate);
 
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
@@ -230,6 +234,8 @@ public class Profile extends AppCompatActivity {
                                 final Map<String,Object> map=new HashMap<>();
                                 map.put("uimage",uri.toString());
                                 map.put("uname",uname.getText().toString());
+                                map.put("address",address.getText().toString());
+                                map.put("phoneNo",phoneNo.getText().toString());
 
                                 dbreference.child(UserID).addValueEventListener(new ValueEventListener() {
                                     @Override
@@ -271,6 +277,8 @@ public class Profile extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()) {
                     uname.setText(snapshot.child("uname").getValue().toString());
+                    address.setText(snapshot.child("address").getValue().toString());
+                    phoneNo.setText(snapshot.child("phoneNo").getValue().toString());
                     Glide.with(getApplicationContext()).load(snapshot.child("uimage").getValue().toString()).into(uimage);
                 }
             }
