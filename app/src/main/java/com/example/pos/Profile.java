@@ -8,7 +8,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -24,7 +26,9 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,7 +58,7 @@ public class Profile extends AppCompatActivity {
 
     ImageView uimage;
     TextInputEditText uname,phoneNo,address;
-    Button btnupdate;
+    Button btnupdate, btndelete;
 
     DatabaseReference dbreference;
     StorageReference storageReference;
@@ -68,6 +72,9 @@ public class Profile extends AppCompatActivity {
     DrawerLayout drawerLayout;
 
     TimePicker timePicker;
+
+    FirebaseAuth auth;
+    FirebaseUser user;
 
 
     @Override
@@ -140,10 +147,8 @@ public class Profile extends AppCompatActivity {
         });
 
 
-
-
-
-
+        auth= FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
 
         uimage=(ImageView)findViewById(R.id.uimage);
         uname= findViewById(R.id.uname);
@@ -151,8 +156,9 @@ public class Profile extends AppCompatActivity {
         phoneNo= findViewById(R.id.phoneNo);
 
         btnupdate=(Button)findViewById(R.id.btnupdate);
+        btndelete=(Button)findViewById(R.id.btndelete);
 
-        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
         UserID=user.getUid();
 
         dbreference= FirebaseDatabase.getInstance().getReference().child("userprofile");
@@ -196,6 +202,59 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 updatetofirebase();
+            }
+        });
+
+        btndelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder dialog = new AlertDialog.Builder(Profile.this);
+                dialog.setTitle("Are you sure?");
+                dialog.setMessage("Deleting this account will result in completely removing your account from the system and you won't be able to access the app");
+
+                dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        final ProgressDialog pd = new ProgressDialog(Profile.this);
+                        pd.setTitle("Deleting");
+                        pd.show();
+                        pd.setMessage("Email: " + user.getEmail());
+                        user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                pd.dismiss();
+                                if (task.isSuccessful()){
+                                    Toast.makeText(Profile.this,"Account Deleted", Toast.LENGTH_LONG).show();
+
+                                    Intent inToMain=new Intent(Profile.this, MainActivity.class);
+                                    inToMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    inToMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(inToMain);
+
+                                }
+                                else{
+                                    Toast.makeText(Profile.this,task.getException().getMessage(), Toast.LENGTH_LONG).show();
+
+                                }
+                            }
+                        });
+
+                    }
+                });
+
+                dialog.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+
+                        dialog.dismiss();
+
+                    }
+                });
+
+                AlertDialog alertDialog=dialog.create();
+                alertDialog.show();
+
             }
         });
     }
