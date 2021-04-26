@@ -32,6 +32,35 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
+    //Testing
+
+    //if @ is present
+    public boolean validEmail(String email){
+
+        boolean hasAtSign = email.indexOf("@")>-1;
+        return hasAtSign;
+    }
+
+    // length of local part of email
+    public int getLocalLength(String email){
+
+        int at=email.indexOf("@");
+        String localPart =email.substring(0,at);
+        return localPart.length();
+    }
+
+    // password
+    public boolean validPassword(String password){
+
+        boolean pass=false;
+        if(password.length()>=8){
+             pass=true;
+        }
+
+        return pass;
+    }
+
+
 
 
     @Override

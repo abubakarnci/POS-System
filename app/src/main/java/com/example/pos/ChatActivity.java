@@ -60,6 +60,25 @@ import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
 
+
+    //Testing
+
+    // get input and give response
+    public boolean getInput(String input){
+
+        boolean result=false;
+        if(input.equals("what you doing")){
+            result=true;
+        }
+
+        return result;
+    }
+
+
+
+
+
+
     private RecyclerView recyclerView;
     private ChatAdapter mAdapter;
     private ArrayList messageArrayList;

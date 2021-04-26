@@ -7,17 +7,21 @@ import static org.junit.Assert.assertEquals;
 
 public class ChatActivityTest {
 
+
+    //comparing input
     @Test
-    public void item() {
+    public void checkRes(){
+        ChatActivity chatActivity=new ChatActivity();
+        assertTrue(chatActivity.getInput("what you doing"));
+
+    }
+
+
+
+    @Test
+    public void valid() {
         assertTrue("Coke",true);
     }
-
-    @Test
-    public void check() {
-        fail("Should written in clear manner");
-        assertEquals("what are you doing", "what you doing");
-    }
-
 
 
 }

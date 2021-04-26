@@ -65,6 +65,18 @@ import ir.androidexception.datatable.model.DataTableRow;
 public class InvoiceActivity2 extends AppCompatActivity {
 
 
+
+    //Testing
+
+    //Comparing invoice number for validation
+
+    public int InvId(int id){
+
+        return id;
+    }
+
+
+
     private static final String TAG = "PdfCreatorActivity";
     private File pdfFile;
     Context context;
@@ -89,6 +101,11 @@ public class InvoiceActivity2 extends AppCompatActivity {
     NavigationView nav;
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

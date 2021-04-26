@@ -30,7 +30,16 @@ public class Dialer extends AppCompatActivity {
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
 
-    TimePicker timePicker;
+    //Testing
+
+    //if + is present
+    public boolean validNumber(String number){
+
+        boolean hasAddSign = number.indexOf("+353")>-1;
+        System.out.println(number.indexOf("+"));
+        return hasAddSign;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

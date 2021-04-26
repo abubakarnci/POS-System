@@ -27,6 +27,22 @@ public class CalculatorActivity extends AppCompatActivity {
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
 
+    // simple calculation test
+    public int getNumbers(int num1, int num2){
+
+        int ans=num1*num2;
+
+        return ans;
+    }
+
+    //if . is present in Double
+    public boolean validDot(String input){
+
+        boolean hasDotSign = input.indexOf(".")>-1;
+        return hasDotSign;
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
