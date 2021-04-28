@@ -308,6 +308,7 @@ public class Inventory2 extends AppCompatActivity {
                     inventObj.sellPrice = Double.parseDouble(String.valueOf(sPrice.getText()));
                     inventObj.costPrice = Double.parseDouble(String.valueOf(cPrice.getText()));
                     inventObj.quantity = Double.parseDouble(String.valueOf(quantity.getText()));
+                    inventObj.tax= Double.parseDouble(String.valueOf(tax.getText()));
                     double cal1 = ((Double.parseDouble(String.valueOf(sPrice.getText()))) - (Double.parseDouble(String.valueOf(cPrice.getText()))));
                     double cal = (cal1 / (Double.parseDouble(String.valueOf(sPrice.getText())))) * 100;
                     inventObj.profit = Double.valueOf(decimalFormat.format(cal));
