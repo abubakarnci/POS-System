@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:id="@+id/drawer"
     tools:openDrawer="start"
+
     tools:context=".InvoiceActivity2">
 
     <RelativeLayout
@@ -30,6 +31,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="74dp"
         android:layout_marginEnd="48dp"
+        android:background="@drawable/custom_button"
+        android:textColor="@color/white"
+
         android:layout_toStartOf="@+id/oldPrintEditText"
         android:text="Print" />
 
@@ -43,6 +47,7 @@
         android:layout_marginEnd="41dp"
         android:ems="10"
         android:importantForAutofill="no"
+        android:hint="Invoice No."
         android:inputType="number"
         app:layout_constraintEnd_toStartOf="@+id/oldPrintBtn"
         app:layout_constraintStart_toStartOf="parent"
