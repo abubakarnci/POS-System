@@ -34,6 +34,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,6 +73,12 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 public class SalesActivity extends AppCompatActivity implements PaymentResultListener {
+
+
+    private RecyclerView recyclerView2;
+    private StaticRvAdapter staticRvAdapter;
+
+
 
     private static final String TAG = "PdfCreatorActivity";
     final private int REQUEST_CODE_ASK_PERMISSIONS = 111;
@@ -116,6 +123,20 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales);
+
+        ArrayList<StaticRvModel> item=new ArrayList<>();
+        item.add(new StaticRvModel(R.drawable.frozen, "Frozen"));
+        item.add(new StaticRvModel(R.drawable.drink, "Drink"));
+        item.add(new StaticRvModel(R.drawable.meat, "Meat"));
+        item.add(new StaticRvModel(R.drawable.vegetable, "Vegetable"));
+        item.add(new StaticRvModel(R.drawable.dairy, "Dairy"));
+
+        recyclerView2= findViewById(R.id.rv_1);
+        staticRvAdapter=new StaticRvAdapter(item);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
+        recyclerView2.setAdapter(staticRvAdapter);
+
+
 
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
 

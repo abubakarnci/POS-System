@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
@@ -48,7 +51,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
        //LayoutInflater inflater=LayoutInflater.from(context);
        // View view = inflater.inflate(R.layout.my_row, parent,false);
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.my_row, parent, false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.dynamic_rv_item_layout, parent, false);
         return new MyViewHolder(view, mListerer);
     }
 
@@ -69,15 +72,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
         EditText item,price,qty;
-        ImageView imgDele;
-        ConstraintLayout mainLayout;
+        ImageView imgCart;
+
 
         public MyViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             item=itemView.findViewById(R.id.item);
             price=itemView.findViewById(R.id.price);
             qty=itemView.findViewById(R.id.qty);
-            imgDele=itemView.findViewById(R.id.img_basket);
+            imgCart=itemView.findViewById(R.id.cart);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -95,7 +98,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             });
 
 
-            imgDele.setOnClickListener(new View.OnClickListener() {
+            imgCart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -127,7 +130,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             });
 
 
-            mainLayout=itemView.findViewById(R.id.mainLayout);
+
 
         }
     }
