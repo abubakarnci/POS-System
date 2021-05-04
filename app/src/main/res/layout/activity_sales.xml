@@ -67,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="350dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="23dp"
             android:layout_marginRight="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -89,44 +89,51 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <Button
-            android:onClick="ShowPopup"
             android:id="@+id/btnSave"
             android:layout_width="183dp"
             android:layout_height="51dp"
-            android:layout_marginEnd="112dp"
-            android:layout_marginBottom="13dp"
+            android:layout_marginTop="700dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="72dp"
             android:background="@drawable/custom_button"
+            android:onClick="ShowPopup"
             android:text="Finish And Pay"
-            android:textSize="20dp"
             android:textAllCaps="false"
             android:textColor="@color/white"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/insert"
             android:layout_width="147dp"
             android:layout_height="50dp"
-            android:layout_marginEnd="224dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginTop="700dp"
+            android:layout_marginEnd="250dp"
+            android:layout_marginBottom="72dp"
             android:hint="Row At Position"
             android:inputType="number"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/bInset"
             android:layout_width="65dp"
             android:layout_height="65dp"
-            android:layout_marginEnd="100dp"
+            android:layout_marginTop="700dp"
+            android:layout_marginEnd="175dp"
             android:layout_marginBottom="72dp"
             android:background="@drawable/button2"
             android:text="Insert"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:textAllCaps="false"/>
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView

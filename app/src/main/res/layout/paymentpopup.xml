@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
-            android:text="Select Payment Method"
+            android:text="Select Payment Method  "
             android:textColor="@color/white"
             android:textSize="30dp"
             android:textStyle="bold|italic" />
