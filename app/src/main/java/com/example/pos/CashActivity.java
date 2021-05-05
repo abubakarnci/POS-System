@@ -21,10 +21,10 @@ import java.util.ArrayList;
 public class CashActivity extends AppCompatActivity {
 
 
-    private ArrayList <String> data=new ArrayList<String>();
-    private ArrayList <String> data1=new ArrayList<String>();
-    private ArrayList <String> data2=new ArrayList<String>();
-    private ArrayList <String> data3=new ArrayList<String>();
+    private ArrayList <String> name=new ArrayList<>();
+    private ArrayList <String> qty=new ArrayList<>();
+    private ArrayList <String> price=new ArrayList<>();
+    private ArrayList <String> total=new ArrayList<>();
 
     private TableLayout table;
 
@@ -33,10 +33,10 @@ public class CashActivity extends AppCompatActivity {
     Button b1;
 
     Double subTotal;
-    String name;
+   /*String name;
     String qty;
     String price;
-    String total;
+    String total;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +47,14 @@ public class CashActivity extends AppCompatActivity {
         ed2=findViewById(R.id.payment);
         ed3=findViewById(R.id.balance);
         b1=findViewById(R.id.cashPay);
+         table = findViewById(R.id.tb1);
 
-        name=getIntent().getStringExtra("name");
-        qty=getIntent().getStringExtra("qty");
-        price=getIntent().getStringExtra("price");
-        total=getIntent().getStringExtra("total");
+        name=getIntent().getStringArrayListExtra("name");
+
+        //name=getIntent().getStringExtra("name");
+        qty=getIntent().getStringArrayListExtra("qty");
+        price=getIntent().getStringArrayListExtra("price");
+        total=getIntent().getStringArrayListExtra("total");
 
         subTotal= Double.valueOf(getIntent().getStringExtra("subTotal"));
         ed1.setText(subTotal.toString());
@@ -109,15 +112,15 @@ public class CashActivity extends AppCompatActivity {
 
     private void fillTable() {
 
-        TableLayout table = (TableLayout) findViewById(R.id.tb1);
 
 
-        String[] itemm = String.valueOf(name).split(",");
+
+        /*String[] itemm = String.valueOf(name).split(",");
         String[] qtyy = String.valueOf(qty).split(",");
         String[] pricee = String.valueOf(price).split(",");
-        String[] billl = String.valueOf(total).split(",");
+        String[] billl = String.valueOf(total).split(",");*/
 
-        for (int i=0; i<itemm.length; i++){
+        for (int i=0; i<name.size(); i++){
             TableRow row=new TableRow(this);
             TextView t1=new TextView(this);
             TextView t2=new TextView(this);
@@ -125,19 +128,22 @@ public class CashActivity extends AppCompatActivity {
             TextView t4=new TextView(this);
 
 
-            t1.setText(itemm[i]);
+
+            t1.setText(name.get(i));
+            System.out.println("Test7: "+ name.get(i));
+
             t1.setTextColor(Color.BLACK);
             t1.setTextSize(17);
 
-            t3.setText(qtyy[i]);
+            t3.setText(qty.get(i));
             t3.setTextColor(Color.BLACK);
             t3.setTextSize(17);
 
-            t2.setText(pricee[i]);
+            t2.setText(price.get(i));
             t2.setTextColor(Color.BLACK);
             t2.setTextSize(17);
 
-            t4.setText(billl[i]);
+            t4.setText(total.get(i));
             t4.setTextColor(Color.BLACK);
             t4.setTextSize(17);
 

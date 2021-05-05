@@ -34,6 +34,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -104,14 +105,20 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
     EditText item,price,qty;
     EditText insert;
     Button bInset;
+    ImageView basket;
 
-    String iName="";
+    /*String iName="";
 
-    Double subTotal;
+
     String iQty;
     String iPrice;
-    String iTotal;
+    String iTotal;*/
 
+    ArrayList<String> iName=new ArrayList<>();
+    ArrayList<String> iQty=new ArrayList<>();
+    ArrayList<String> iPrice=new ArrayList<>();
+    ArrayList<String> iTotal=new ArrayList<>();
+    Double subTotal;
 
     Dialog myDialog;
 
@@ -268,26 +275,37 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
             public void onClick(View view) {
 
 
+                for(int j=0; j<mAdapter.iName.size(); j++){
+                    iName.add(mAdapter.iName.get(j));
+                    iQty.add(mAdapter.iQty.get(j).toString());
+                    iPrice.add(mAdapter.iPrice.get(j).toString());
+                    iTotal.add(mAdapter.iBill.get(j).toString());
+                    System.out.println("Test8:"+mAdapter.iName.get(j));
+                }
+
                 for (int i = 0; i < mAdapter.dataObj.size(); i++) {
                     dataObj.item = mAdapter.dataObj.get(i).getItem();
-                    iName = (mAdapter.dataObj.get(i).getItem().toString());
+                    //iName = (mAdapter.dataObj.get(i).getItem().toString());
 
-                    Log.e("Test: ", iName);
-                    System.out.println(iName);
+
+                    //Log.e("Test: ", iName);
+                   // System.out.println(iName);
 
                     dataObj.qty = mAdapter.dataObj.get(i).getQty();
-                    iQty = mAdapter.dataObj.get(i).getQty().toString();
+                    //iQty = mAdapter.dataObj.get(i).getQty().toString();
 
                     dataObj.price = mAdapter.dataObj.get(i).getPrice();
-                    iPrice = mAdapter.dataObj.get(i).getPrice().toString();
+                    //iPrice = mAdapter.dataObj.get(i).getPrice().toString();
 
                     dataObj.bill = mAdapter.dataObj.get(i).getBill();
-                    iTotal = mAdapter.dataObj.get(i).getBill().toString();
+                    //iTotal = mAdapter.dataObj.get(i).getBill().toString();
 
                     dataObj.tBill = mAdapter.dataObj.get(i).tBill;
                     subTotal = mAdapter.dataObj.get(i).tBill;
                 }
 
+                //mAdapter.iName.set( mAdapter.iName.indexOf("Coke") , "D_NEW");
+                System.out.println("Test4: "+mAdapter.iName.get(0));
 
                 dataObj.date = new Date().getTime();
 
@@ -650,6 +668,32 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
 
 
         payButton=findViewById(R.id.btnSave);
+        basket=findViewById(R.id.basket);
+
+        basket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                for(int j=0; j<mAdapter.iName.size(); j++){
+                    iName.add(mAdapter.iName.get(j));
+                    iQty.add(mAdapter.iQty.get(j).toString());
+                    iPrice.add(mAdapter.iPrice.get(j).toString());
+                    iTotal.add(mAdapter.iBill.get(j).toString());
+                    System.out.println("Test8:"+mAdapter.iName.get(j));
+                }
+
+
+                Intent intent= new Intent(SalesActivity.this, ConfirmOrderActivity.class);
+
+                intent.putExtra("name", iName);
+                intent.putExtra("qty", iQty);
+                intent.putExtra("price", iPrice);
+                intent.putExtra("total", iTotal);
+                startActivity(intent);
+            }
+        });
+
+
         //name = (EditText) findViewById(R.id.person_name);
         price= (EditText) findViewById(R.id.price);
         item=findViewById(R.id.item);

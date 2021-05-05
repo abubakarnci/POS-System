@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".IntroActivity"></activity>
+        <activity android:name=".ConfirmOrderActivity"></activity>
+        <activity android:name=".IntroActivity" />
         <activity android:name=".CashActivity" />
         <activity android:name=".CalculatorActivity" />
         <activity android:name=".ChatActivity" />

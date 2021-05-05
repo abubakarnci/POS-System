@@ -73,6 +73,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         EditText item,price,qty;
         ImageView imgCart;
+        TextView  cName, cPrice;
 
 
         public MyViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
@@ -81,6 +82,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             price=itemView.findViewById(R.id.price);
             qty=itemView.findViewById(R.id.qty);
             imgCart=itemView.findViewById(R.id.cart);
+
+            cName=itemView.findViewById(R.id.cName);
+            cPrice=itemView.findViewById(R.id.cPrice);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
