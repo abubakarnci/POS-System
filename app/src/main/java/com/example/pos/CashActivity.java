@@ -135,20 +135,23 @@ public class CashActivity extends AppCompatActivity {
 
             t1.setText(name.get(i));
             System.out.println("Test7: "+ name.get(i));
-
+            t1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             t1.setTextColor(Color.BLACK);
             t1.setTextSize(17);
 
             t3.setText(qty.get(i));
             t3.setTextColor(Color.BLACK);
+            t3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             t3.setTextSize(17);
 
             t2.setText(price.get(i));
             t2.setTextColor(Color.BLACK);
+            t2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             t2.setTextSize(17);
 
             t4.setText(total.get(i));
             t4.setTextColor(Color.BLACK);
+            t4.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             t4.setTextSize(17);
 
             row.addView(t1);

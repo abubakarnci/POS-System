@@ -130,7 +130,7 @@
         android:orientation="vertical">
 
         <TableLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="355dp"
             android:id="@+id/tb1"
             android:stretchColumns="*">
@@ -144,16 +144,18 @@
                     android:id="@+id/t1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Product Name"
-                    android:textSize="19sp"
+                    android:text="Product"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:layout_marginStart="3dp"/>
+                    />
                 <TextView
                     android:id="@+id/t2"
+                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="U.Price"
-                    android:textSize="19sp"
+                    android:textSize="20sp"
                     android:textColor="@color/black"
                     />
 
@@ -162,16 +164,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Quantity"
-                    android:textSize="19sp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     android:textColor="@color/black"
                     />
 
                 <TextView
                     android:id="@+id/t4"
+                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Total"
-                    android:textSize="19sp"
+                    android:textSize="20sp"
                     android:textColor="@color/black"
                     />
 
