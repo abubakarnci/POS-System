@@ -63,6 +63,7 @@ public class CashActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+
             }
 
             @Override
@@ -74,8 +75,11 @@ public class CashActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                double payment= Double.parseDouble(ed2.getText().toString());
-                double bal= payment-subTotal;
+                double payment=0.0;
+                double bal=0.0;
+
+                payment= Double.parseDouble(ed2.getText().toString());
+                bal= payment-subTotal;
 
                 ed3.setText(String.valueOf(bal));
 

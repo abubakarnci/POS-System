@@ -508,20 +508,23 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
 
 
         double amount=0.0;
+        /*
         String[] itemm = String.valueOf(mAdapter.dataObj.get(0).getItem()).split(",");
         String[] qtyy = String.valueOf(mAdapter.dataObj.get(0).getQty()).split(",");
         String[] pricee = String.valueOf(mAdapter.dataObj.get(0).getPrice()).split(",");
         String[] billl = String.valueOf(mAdapter.dataObj.get(0).getBill()).split(",");
-        amount= amount + mAdapter.dataObj.get(itemm.length-1).tBill;
+        */
+        amount=mAdapter.tBill;
+        //amount= amount + mAdapter.dataObj.get(itemm.length-1).tBill;
 
-        for (int x=0; x<itemm.length; x++) {
+        for (int x=0; x<iName.size(); x++) {
            // Log.e("Sales: ",result[x]);
            // System.out.println(result[x]);
 
-            table.addCell((new Phrase(itemm[x],i)));
-            table.addCell((new Phrase(qtyy[x],i)));
-            table.addCell((new Phrase(pricee[x],i)));
-            table.addCell((new Phrase(billl[x],i)));
+            table.addCell((new Phrase(iName.get(x),i)));
+            table.addCell((new Phrase(iQty.get(x),i)));
+            table.addCell((new Phrase(iPrice.get(x),i)));
+            table.addCell((new Phrase(iTotal.get(x),i)));
 
         }
 
@@ -674,21 +677,7 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
             @Override
             public void onClick(View v) {
 
-                for(int j=0; j<mAdapter.iName.size(); j++){
-                    iName.add(mAdapter.iName.get(j));
-                    iQty.add(mAdapter.iQty.get(j).toString());
-                    iPrice.add(mAdapter.iPrice.get(j).toString());
-                    iTotal.add(mAdapter.iBill.get(j).toString());
-                    System.out.println("Test8:"+mAdapter.iName.get(j));
-                }
-
-
                 Intent intent= new Intent(SalesActivity.this, ConfirmOrderActivity.class);
-
-                intent.putExtra("name", iName);
-                intent.putExtra("qty", iQty);
-                intent.putExtra("price", iPrice);
-                intent.putExtra("total", iTotal);
                 startActivity(intent);
             }
         });
