@@ -19,6 +19,8 @@ public class ConfirmOrderActivityAdapter extends RecyclerView.Adapter<ConfirmOrd
     MyAdapter mAdapter= new MyAdapter(null, null);
 
 
+    ConfirmOrderActivity confirmOrderActivity=new ConfirmOrderActivity();
+
 
     Activity activity;
 
@@ -53,7 +55,8 @@ public class ConfirmOrderActivityAdapter extends RecyclerView.Adapter<ConfirmOrd
         holder.cName.setText("Coke");
         holder.cPrice.setText("20");
 
-        System.out.println("Test9: "+ mAdapter.iName);
+        //System.out.println("Test9: "+ mAdapter.iName);
+
 
     }
 

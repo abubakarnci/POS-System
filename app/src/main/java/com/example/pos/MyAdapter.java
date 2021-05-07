@@ -60,6 +60,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         holder.item.setText(data1.get(i).getItemName());
         holder.price.setText(String.valueOf(data1.get(i).getSellPrice()));
+        holder.qty.setText("0");
 
 
     }
