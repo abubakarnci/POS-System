@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     private OnItemClickListener mListerer;
-    ArrayList<DataObj> dataObj=new ArrayList<>();;
+    ArrayList<DataObj> dataObj=new ArrayList<>();
     ArrayList<String> iName=new ArrayList<>();
     ArrayList<Double> iPrice=new ArrayList<>();
     ArrayList<Double> iQty=new ArrayList<>();
@@ -122,8 +122,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
                             dataObj.add(new DataObj(iName,iPrice,iQty,iBill,tBill));
 
+                            System.out.println("Check: "+iName);
 
-                           //Log.e("Test",dataObj.get(0).getItem().toString());
+
+
+                            //Log.e("Test",dataObj.get(0).getItem().toString());
                             //System.out.println(dataObj.get(0).item);
                             //salesActivity=new SalesActivity();
                             listener.OnDeleteClick(position);
