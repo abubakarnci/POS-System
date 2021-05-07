@@ -1,6 +1,7 @@
 package com.example.pos;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -38,10 +39,22 @@ public class CashActivity extends AppCompatActivity {
     String price;
     String total;*/
 
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cash);
+
+        toolbar =findViewById(R.id.toolbar3);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         ed1=findViewById(R.id.subTotal);
         ed2=findViewById(R.id.payment);

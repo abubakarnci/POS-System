@@ -16,6 +16,7 @@ public class ConfirmOrderActivityAdapter extends RecyclerView.Adapter<ConfirmOrd
 
     ArrayList<MyAdapter> items;
 
+    MyAdapter mAdapter= new MyAdapter(null, null);
 
 
 
@@ -24,8 +25,6 @@ public class ConfirmOrderActivityAdapter extends RecyclerView.Adapter<ConfirmOrd
     public ConfirmOrderActivityAdapter(Activity activity){
 
         this.activity=activity;
-        this.items=items;
-
     }
 
     public class ConfirmOrderViewHolder extends RecyclerView.ViewHolder {
@@ -54,13 +53,13 @@ public class ConfirmOrderActivityAdapter extends RecyclerView.Adapter<ConfirmOrd
         holder.cName.setText("Coke");
         holder.cPrice.setText("20");
 
-        System.out.println("Test10: ");
+        System.out.println("Test9: "+ mAdapter.iName);
 
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return 1;
     }
 
 

@@ -274,13 +274,18 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
             @Override
             public void onClick(View view) {
 
+                iName.clear();
+                iQty.clear();
+                iPrice.clear();
+                iTotal.clear();
 
                 for(int j=0; j<mAdapter.iName.size(); j++){
                     iName.add(mAdapter.iName.get(j));
                     iQty.add(mAdapter.iQty.get(j).toString());
                     iPrice.add(mAdapter.iPrice.get(j).toString());
                     iTotal.add(mAdapter.iBill.get(j).toString());
-                    System.out.println("Test8:"+mAdapter.iName.get(j));
+                   // System.out.println("Test8:"+mAdapter.iName.get(j));
+                    System.out.println("Test8:"+iName.size());
                 }
 
                 for (int i = 0; i < mAdapter.dataObj.size(); i++) {
