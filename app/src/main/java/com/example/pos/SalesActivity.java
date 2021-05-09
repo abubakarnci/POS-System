@@ -692,14 +692,16 @@ public class SalesActivity extends AppCompatActivity implements PaymentResultLis
                     iQty.add(mAdapter.iQty.get(j).toString());
                     iPrice.add(mAdapter.iPrice.get(j).toString());
                     iTotal.add(mAdapter.iBill.get(j).toString());
-                    // System.out.println("Test8:"+mAdapter.iName.get(j));
-                    System.out.println("Test8:"+iName.size());
                 }
 
 
-                Intent intent= new Intent(SalesActivity.this, ConfirmOrderActivity.class);
+                Intent p= new Intent(SalesActivity.this, ConfirmOrderActivity.class);
 
-                startActivity(intent);
+                p.putExtra("name", iName);
+                p.putExtra("qty", iQty);
+                p.putExtra("price", iPrice);
+                p.putExtra("total", iTotal);
+                startActivity(p);
             }
         });
 

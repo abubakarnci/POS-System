@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,29 +15,36 @@ import java.util.ArrayList;
 public class ConfirmOrderActivityAdapter extends RecyclerView.Adapter<ConfirmOrderActivityAdapter.ConfirmOrderViewHolder> {
 
 
-    ArrayList<MyAdapter> items;
+    ArrayList<String> name;
+    ArrayList<String> price;
+    ArrayList<String> qty;
+    ArrayList<String> total;
 
-    MyAdapter mAdapter= new MyAdapter(null, null);
-
-
-    ConfirmOrderActivity confirmOrderActivity=new ConfirmOrderActivity();
 
 
     Activity activity;
 
-    public ConfirmOrderActivityAdapter(Activity activity){
+    public ConfirmOrderActivityAdapter(Activity activity, ArrayList<String>name,ArrayList<String>price,ArrayList<String>qty, ArrayList<String>total ){
 
         this.activity=activity;
+        this.name=name;
+        this.price=price;
+        this.qty=qty;
+        this.total=total;
     }
 
     public class ConfirmOrderViewHolder extends RecyclerView.ViewHolder {
-        TextView cName, cPrice;
+        TextView cName, cPrice, unit, total;
+        EditText qty;
 
         public ConfirmOrderViewHolder(@NonNull View itemView) {
             super(itemView);
 
             cName=itemView.findViewById(R.id.cName);
             cPrice=itemView.findViewById(R.id.cPrice);
+            qty=itemView.findViewById(R.id.qty);
+            unit=itemView.findViewById(R.id.unit);
+            total=itemView.findViewById(R.id.total);
 
         }
     }
@@ -52,17 +60,20 @@ public class ConfirmOrderActivityAdapter extends RecyclerView.Adapter<ConfirmOrd
     @Override
     public void onBindViewHolder(@NonNull ConfirmOrderViewHolder holder, int position) {
 
-        holder.cName.setText("Coke");
-        holder.cPrice.setText("20");
+        holder.cName.setText(name.get(position));
+        holder.cPrice.setText(price.get(position));
+        holder.qty.setText(qty.get(position));
+        holder.unit.setText(qty.get(position));
+        holder.total.setText(total.get(position));
 
-        //System.out.println("Test9: "+ mAdapter.iName);
+        //System.out.println("bmw"+name);
 
 
     }
 
     @Override
     public int getItemCount() {
-        return 1;
+        return name.size();
     }
 
 

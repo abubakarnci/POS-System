@@ -16,10 +16,16 @@ public class ConfirmOrderActivity extends AppCompatActivity {
 
     RecyclerView orderRv;
     ConfirmOrderActivityAdapter confirmOrderActivityAdapter;
-    ArrayList<InventObj> input;
+    ArrayList<String> input;
     Toolbar toolbar;
 
     Activity context;
+
+    private ArrayList <String> name=new ArrayList<>();
+    private ArrayList <String> qty=new ArrayList<>();
+    private ArrayList <String> price=new ArrayList<>();
+    private ArrayList <String> total=new ArrayList<>();
+
 
 
     @Override
@@ -28,6 +34,15 @@ public class ConfirmOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_confirm_order);
 
         input=new ArrayList<>();
+
+        name=getIntent().getStringArrayListExtra("name");
+        qty=getIntent().getStringArrayListExtra("qty");
+        price=getIntent().getStringArrayListExtra("price");
+        total=getIntent().getStringArrayListExtra("total");
+
+
+        hello();
+
 
 
         toolbar =findViewById(R.id.toolbar2);
@@ -41,10 +56,19 @@ public class ConfirmOrderActivity extends AppCompatActivity {
         });
 
         orderRv=findViewById(R.id.order_rv);
-        confirmOrderActivityAdapter= new ConfirmOrderActivityAdapter(context);
+        confirmOrderActivityAdapter= new ConfirmOrderActivityAdapter(context,name,price,qty,total);
         orderRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         orderRv.setAdapter(confirmOrderActivityAdapter);
 
+
+
+    }
+
+    private void hello() {
+
+        for(int i=0; i<9; i++ ){
+            input.add("Apple"+i);
+        }
 
     }
 }
